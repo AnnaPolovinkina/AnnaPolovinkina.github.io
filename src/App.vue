@@ -18,6 +18,11 @@
         name: "App",
         components: {
             Header: Header
+        },
+        props: {
+            info: {
+                type: Object
+            }
         }
     }
 </script>

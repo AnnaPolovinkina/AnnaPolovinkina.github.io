@@ -23,13 +23,13 @@
 
 <script>
     export default {
+        name: "ProductCard",
         props: {
             card: {
                 type: Object,
                 required: true
             }
         },
-        name: "ProductCard"
     }
 </script>
 

@@ -13,7 +13,6 @@
 </template>
 
 <script>
-    import Header from '@/components/Header'
     import ProductCard from '@/components/ProductCard'
 
     export default {
@@ -102,7 +101,6 @@
             }
         },
         components: {
-            Header: Header,
             ProductCard: ProductCard
         },
         computed: {
