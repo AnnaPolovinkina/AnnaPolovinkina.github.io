@@ -60,6 +60,10 @@
         position: relative;
         overflow: hidden;
     }
+    .card-text {
+        max-height: 200px;
+        overflow: hidden;
+    }
     .card-btn {
         background-color: #ef98aa;
         color: #FFFFFF;

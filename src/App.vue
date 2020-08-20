@@ -5,6 +5,12 @@
       <div class="wrapper">
         <div class="container">
           <router-view></router-view>
+
+          <!-- <h3>ВЫВОД ДАННЫХ</h3>
+            -<div>
+               {{ allProducts }}
+             </div>-->
+
         </div>
       </div>
     </main>
@@ -12,6 +18,7 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
     import Header from '@/components/Header'
 
     export default {
@@ -19,11 +26,10 @@
         components: {
             Header: Header
         },
-        props: {
-            info: {
-                type: Object
-            }
-        }
+        mounted () {
+            this.$store.dispatch('fetchProducts');
+        },
+        // computed: mapGetters(['allProducts']),
     }
 </script>
 
