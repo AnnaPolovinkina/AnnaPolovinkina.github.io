@@ -1,15 +1,20 @@
 <template>
     <div>
-<!--        <select v-model="filter">
-            <option value="bags">Сумки</option>
-            <option value="glasses">Очки</option>
-            <option value="gloves">Перчатки</option>
-            <option value="purses">Кошельки</option>
-        </select>-->
-        <SelectCategory v-bind:filter="filter"></SelectCategory>
+        <SelectCategory v-on:changeFilter="filterCategory = $event"></SelectCategory>
+
         <br>
-        <!--{{ filteredCards }}-->
-        <!--<b-button id="show-btn" @click="$bvModal.show('bv-modal-example')">Open Modal</b-button>-->
+        <select v-model="filterPrice">
+            <option value="default">По умолчанию</option>
+            <option value="increment">По возрастанию</option>
+            <option value="decrement">По убыванию</option>
+        </select>
+        <select v-model="filterSale">
+            <option value="all">Все товары</option>
+            <option value="true">Со скидкой</option>
+            <option value="false">Без скидки</option>
+        </select>
+        <br>
+
 
         <div class="row">
             <ProductCard2 v-for="card in filteredCards" v-bind:card="card"></ProductCard2>
@@ -28,7 +33,9 @@
         name: 'Catalog',
         data() {
             return {
-                filter: 'red',
+                filterCategory: '',
+                filterPrice: '',
+                filterSale: '',
             }
         },
         components: {
@@ -39,11 +46,10 @@
         computed: {
             ...mapGetters(['allProducts']),
             filteredCards() {
-                var filter = this.filter,
+                var filter = this.filterCategory,
                     allResult = this.$store.getters.allProducts,
                     cardResult = [];
 
-                console.log(filter);
                 allResult.forEach(function (item, i, arr) {
                     if (item.category == filter) {
                         cardResult.push(item);
@@ -51,11 +57,6 @@
                 });
                 return cardResult;
             }
-        },
-        mounted () {
-            this.$on('filtered', (filter) => {
-                this.filter = filter
-            })
         },
     }
 

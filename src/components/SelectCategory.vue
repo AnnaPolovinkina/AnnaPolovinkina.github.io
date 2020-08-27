@@ -1,10 +1,9 @@
 <template>
-        <select v-model="filter">
+        <select v-model="filter" v-on:change="changeFilter">
             <option v-for="category in filteredOptions" v-bind:name="category.category">
                 {{ category.category }}
             </option>
         </select>
-        <!--<p>{{ filteredOptions }}</p>-->
 </template>
 
 <script>
@@ -12,9 +11,9 @@
 
     export default {
         name: "SelectCategory",
-        props: {
-            filter: {
-                type: String
+        data() {
+            return {
+                filter: '',
             }
         },
         computed: {
@@ -30,22 +29,24 @@
                 return categoryResult;*/
 
                 var allResult = this.$store.getters.allProducts,
-                    categoryResult = [];
+                    categoryResult = [],
+                    jsonCategory;
                 allResult.forEach(function (item, i, arr) {
-                    var jsonCategory = item.category;
-/*                    var id = item.id;
-                    categoryResult[item.id] = item.category;*/
-                    categoryResult.push({
-                        category: jsonCategory
-                    });
+                    jsonCategory = item.category;
+                    if (!categoryResult.includes(jsonCategory)) {
+                        categoryResult.push(jsonCategory);
+                    }
+                });
+                categoryResult = categoryResult.map(function (item, index,array) {
+                    return {category: item};
                 });
                 return categoryResult; //Массив с категориями для селекта
-
-
             }
         },
-        mounted () {
-            this.$emit('filtered', this.filter);
+        methods: {
+            changeFilter() {
+                this.$emit('changeFilter', this.filter)
+            }
         }
     }
 </script>

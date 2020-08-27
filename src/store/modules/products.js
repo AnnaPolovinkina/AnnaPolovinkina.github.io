@@ -4,7 +4,7 @@ import VueAxios from 'vue-axios'
 
 Vue.use(VueAxios, axios)
 
-var info = []; //Почему-то сейчас на главной выводится то, что тут написано
+var info = [];
 var response;
 export default {
     actions: {
