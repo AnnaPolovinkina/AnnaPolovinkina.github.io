@@ -37,6 +37,7 @@
                         categoryResult.push(jsonCategory);
                     }
                 });
+                // this.filter = categoryResult[0];
                 categoryResult = categoryResult.map(function (item, index,array) {
                     return {category: item};
                 });

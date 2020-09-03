@@ -13,7 +13,7 @@
                 <p class="card-text">{{card.description}}</p>
                 <p class="card-price">{{card.price}}</p>
                 <p class="card-category">{{card.category}}</p>
-                <a href="#" class="btn card-btn">В корзину</a>
+                <a href="#" class="btn card-btn" v-on:click="addCardToCart">В корзину</a>
 
                 <div v-if="card.isSale" class="sale">
                     <span>Скидка</span>
@@ -32,6 +32,11 @@
                 required: true
             }
         },
+        methods: {
+            addCardToCart() {
+                this.$emit('addCardToCart', this.card);
+            }
+        }
     }
 </script>
 

@@ -24,7 +24,7 @@ export default {
     },
     getters: {
         allProducts(state) {
-            return state.products  //Работает
+            return state.products
         },
     },
 }

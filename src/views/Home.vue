@@ -7,6 +7,9 @@
         <a href="/catalog2">
             Перейти в каталог 2
         </a>
+        <a href="/cart">
+            Перейти в корзину
+        </a>
     </div>
 </template>
 
