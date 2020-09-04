@@ -6,7 +6,10 @@
         <div class="cart-item_price">{{cartItemData.price}}</div>
         <div class="cart-item_category">{{cartItemData.category}}</div>
 
+        <button v-on:click="increment">+</button>
         <div class="cart-item_count">Кол-во: {{cartItemData.count}}</div>
+        <button v-on:click="decrement">-</button>
+
         <div class="cart-item_delete" v-on:click="deleteCartItem">УДАЛИТЬ</div>
     </div>
 </template>
@@ -22,6 +25,12 @@
         methods: {
             deleteCartItem() {
                 this.$emit('deleteFromCart')
+            },
+            increment() {
+                this.$emit('incrementCount');
+            },
+            decrement() {
+                this.$emit('decrementCount');
             }
         },
         mounted() {

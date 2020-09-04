@@ -15,12 +15,18 @@
 
                     </div>
                     <div class="col-xl-2 cart">
+                        <!--<router-link v-bind:to="{name: 'cart', params: {cardData: cart}}">
+                            <div class="cart-btn">Корзина: {{cart.length}}</div>
+                        </router-link>-->
+
+                        <router-link v-bind:to="{name: 'cart', params: {cardData: cart}}">
                         <div class="cart">
                             <img src="@/assets/cart1.png" alt="Корзина">
                             <div class="count-products">
-                                15
+                                {{cart.length}}
                             </div>
                         </div>
+                        </router-link>
 
                     </div>
 
@@ -31,8 +37,17 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
+    import Cart from  '@/components/Cart'
+
     export default {
-        name: "Header"
+        name: "Header",
+        components: {
+            Cart: Cart
+        },
+        computed: {
+            ...mapGetters(['cart'])
+        }
     }
 </script>
 

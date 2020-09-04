@@ -1,7 +1,11 @@
 <template>
     <div>
         <h3>Каталог</h3>
-        <Cart v-if="cart.length" v-bind:cardData="cart"></Cart>
+        <!--<Cart v-if="cart.length" v-bind:cardData="cart"></Cart>-->
+<!--        <router-link v-bind:to="{name: 'cart', params: {cardData: cart}}">
+            <div class="cart-btn">Корзина: {{cart.length}}</div>
+        </router-link>-->
+
         <SelectCategory v-on:changeFilter="filterCategory = $event"></SelectCategory>
         <br>
         <select v-model="filterSale">
@@ -71,13 +75,13 @@
 
 
                 allResult.forEach(function (item, i, arr) {
-/*                    if (item.category == filterCategory) {
+                    if (item.category == filterCategory) {
                         cardResult.push(item);
-                    }*/
+                    }
                     // if (filterCategory.length && filterSale.length) {
-                        if (item.category == filterCategory || String(item.isSale) == filterSale) {
+                        /*if (item.category == filterCategory || String(item.isSale) == filterSale) {
                             cardResult.push(item);
-                        }
+                        }*/
 
 /*                    if (filterCategory.length) {
                         if (item.category == filterCategory) {
@@ -87,7 +91,7 @@
                     // }
                 });
 
-                return allResult;
+                return cardResult;
             }
         },
     }
@@ -95,5 +99,10 @@
 </script>
 
 <style scoped>
+    .cart-btn {
+        width: 100px;
+        height: 100px;
+        background: yellow;
+    }
 
 </style>

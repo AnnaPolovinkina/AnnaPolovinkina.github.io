@@ -13,11 +13,19 @@ export default new Router({
         },
         {
             path: '/catalog',
+            name: 'catalog',
             component: () => import('./views/Catalog.vue')
         },
         {
             path: '/catalog2',
+            name: 'catalog2',
             component: () => import('./views/Catalog2.vue')
+        },
+        {
+            path: '/cart',
+            name: 'cart',
+            component: () => import('./components/Cart.vue'),
+            props: true
         }
     ]
 })

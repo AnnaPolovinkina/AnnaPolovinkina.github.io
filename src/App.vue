@@ -4,7 +4,10 @@
       <Header></Header>
       <div class="wrapper">
         <div class="container">
-          <router-view></router-view>
+          <keep-alive>
+            <router-view></router-view>
+          </keep-alive>
+
 
           <!-- <h3>ВЫВОД ДАННЫХ</h3>
             -<div>
