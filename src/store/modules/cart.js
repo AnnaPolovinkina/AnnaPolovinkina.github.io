@@ -39,8 +39,8 @@ export default {
             state.cart[index].count++
         },
         decrementItem(state, index) {
-            if (state.cart[index] > 1) {
-                state.cart[index].count--  //Не работает
+            if (state.cart[index].count > 1) {
+                state.cart[index].count--
             }
         },
     },

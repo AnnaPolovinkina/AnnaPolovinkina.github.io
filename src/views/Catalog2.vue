@@ -66,12 +66,10 @@
                     cardResult = [],
                     arrFilter = [];
                 arrFilter.push(filterCategory, filterSale, filterPrice);
-
-                console.log(arrFilter);
-
+/*
                 arrFilter.forEach(function (item) {
-                    console.log(item.length);
                 });
+*/
 
 
                 allResult.forEach(function (item, i, arr) {

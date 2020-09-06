@@ -3,14 +3,27 @@
         <img v-bind:src="cartItemData.img_preview" alt="">
         <div class="cart-item_title">{{cartItemData.title}}</div>
         <div class="cart-item_description">{{cartItemData.description}}</div>
-        <div class="cart-item_price">{{cartItemData.price}}</div>
-        <div class="cart-item_category">{{cartItemData.category}}</div>
+        <div class="cart-item_price">
+            <div class="card-item__caption">Цена</div>
+            <div>{{cartItemData.price}}</div>
+        </div>
+        <div class="cart-item_category">
+            <div class="card-item__caption">Категория</div>
+            <div>{{cartItemData.category}}</div>
+        </div>
 
-        <button v-on:click="increment">+</button>
-        <div class="cart-item_count">Кол-во: {{cartItemData.count}}</div>
-        <button v-on:click="decrement">-</button>
 
-        <div class="cart-item_delete" v-on:click="deleteCartItem">УДАЛИТЬ</div>
+        <div class="cart-item_count">
+            <div class="card-item__caption">Количество</div>
+            <div>
+                <button v-on:click="increment">+</button>
+                {{cartItemData.count}}
+                <button v-on:click="decrement">-</button>
+            </div>
+        </div>
+
+
+        <button class="cart-item_delete" v-on:click="deleteCartItem">x</button>
     </div>
 </template>
 
@@ -46,12 +59,18 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        margin-top: 20px;
+        margin-top: 30px;
+        border: 2px solid #ef98aa;
+        background: #FFFFFF;
+        border-radius: 5px;
+        padding: 5px 15px;
     }
     .cart-item_description {
         max-height: 72px;
         max-width: 500px;
         overflow: hidden;
     }
-
+    .card-item__caption {
+        font-weight: bold;
+    }
 </style>
