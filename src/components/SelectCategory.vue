@@ -19,15 +19,6 @@
         computed: {
             ...mapGetters(['allProducts']),
             filteredOptions() {
-/*                var allResult = this.$store.getters.allProducts;
-                var categoryResult = [];
-                allResult.forEach(function (item, i, arr) {
-                    if (!categoryResult.includes(item.category)) {
-                        categoryResult.push(item.category);
-                    }
-                });
-                return categoryResult;*/
-
                 var allResult = this.$store.getters.allProducts,
                     categoryResult = [],
                     jsonCategory;
@@ -37,18 +28,22 @@
                         categoryResult.push(jsonCategory);
                     }
                 });
-                // this.filter = categoryResult[0];
                 categoryResult = categoryResult.map(function (item, index,array) {
                     return {category: item};
                 });
-                return categoryResult; //Массив с категориями для селекта
+                categoryResult.unshift({category: 'Все категории'});
+                return categoryResult;
             }
+        },
+        mounted() {
+            this.filter = 'Все категории';
+            this.$emit('changeFilter', this.filter);
         },
         methods: {
             changeFilter() {
-                this.$emit('changeFilter', this.filter)
+                this.$emit('changeFilter', this.filter);
             }
-        }
+        },
     }
 </script>
 
@@ -56,4 +51,5 @@
     select {
         width: 300px;
     }
+
 </style>

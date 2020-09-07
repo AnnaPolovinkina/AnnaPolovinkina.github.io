@@ -6,15 +6,15 @@
             <div class="cart-btn">Корзина: {{cart.length}}</div>
         </router-link>-->
 
-        <SelectCategory v-on:changeFilter="filterCategory = $event"></SelectCategory>
+        <SelectCategory v-on:changeFilter="filteredCategory"></SelectCategory>
         <br>
         <select v-model="filterSale">
-            <!--<option value="all">Все товары</option>-->
+            <option value="all">Все товары</option>
             <option value="true">Со скидкой</option>
             <option value="false">Без скидки</option>
         </select>
         <select v-model="filterPrice">
-            <!--<option value="default">По умолчанию</option>-->
+            <option value="default">По умолчанию</option>
             <option value="increment">По возрастанию</option>
             <option value="decrement">По убыванию</option>
         </select>
@@ -39,8 +39,8 @@
         data() {
             return {
                 filterCategory: '',
-                filterPrice: '',
-                filterSale: '',
+                filterSale: 'all',
+                filterPrice: 'default',
             }
         },
         components: {
@@ -53,6 +53,9 @@
             ...mapActions(['addToCart']),
             toCart(data) {
                 this.addToCart(data);
+            },
+            filteredCategory(data) {
+                this.filterCategory = data;
             }
         },
         computed: {
@@ -65,30 +68,59 @@
                     allResult = this.$store.getters.allProducts,
                     cardResult = [],
                     arrFilter = [];
-                arrFilter.push(filterCategory, filterSale, filterPrice);
+                arrFilter.push({category: filterCategory}, {isSale: filterSale});
+
+                // console.log(filterCategory);
+                console.log(arrFilter);
 /*
                 arrFilter.forEach(function (item) {
                 });
 */
 
+/*                if (arrFilter.filter(item => Boolean(item)).length) {
+                    arrFilter.forEach(function (itemFilter, iFilter, arrFilter) {
+                        if (itemFilter) {
 
-                allResult.forEach(function (item, i, arr) {
-                    if (item.category == filterCategory) {
-                        cardResult.push(item);
-                    }
-                    // if (filterCategory.length && filterSale.length) {
-                        /*if (item.category == filterCategory || String(item.isSale) == filterSale) {
-                            cardResult.push(item);
-                        }*/
-
-/*                    if (filterCategory.length) {
-                        if (item.category == filterCategory) {
-                            cardResult.push(item);
+                            console.log('фильтр не пустой');
                         }
-                    }*/
-                    // }
+                    });
+                    allResult.forEach(function (itemCard, iCard, arrCard) {
+                        if (itemCard.category == filterCategory) {
+                            cardResult.push(itemCard);
+                        }
+                        // if (filterCategory.length && filterSale.length) {
+                        /!*if (item.category == filterCategory || String(item.isSale) == filterSale) {
+                            cardResult.push(item);
+                        }*!/
+                        /!*                    if (filterCategory.length) {
+                                                if (item.category == filterCategory) {
+                                                    cardResult.push(item);
+                                                }
+                                            }*!/
+                        // }
+                    });
+                } */
+
+                arrFilter.forEach(function (itemFilter, iFilter, arrFilter) {
+                    var values = Object.values(itemFilter);
+                    // console.log(values.filter(item => Boolean(item)).length);
                 });
 
+                if (arrFilter.filter(item => Boolean(item)).length) {
+                    arrFilter.forEach(function (itemFilter, iFilter, arrFilter) {
+                        if (itemFilter) {
+
+                            // console.log('фильтр не пустой');
+                        }
+                    });
+                    allResult.forEach(function (itemCard, iCard, arrCard) {
+                        if (itemCard.category == filterCategory) {
+                            cardResult.push(itemCard);
+                        }
+                    });
+                } else {
+                    cardResult = allResult;
+                }
                 return cardResult;
             }
         },
