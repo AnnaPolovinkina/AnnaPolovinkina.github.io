@@ -67,59 +67,12 @@
                     filterPrice = this.filterPrice,
                     allResult = this.$store.getters.allProducts,
                     cardResult = [],
-                    arrFilter = [];
-                arrFilter.push({category: filterCategory}, {isSale: filterSale});
-
-                // console.log(filterCategory);
-                console.log(arrFilter);
-/*
-                arrFilter.forEach(function (item) {
-                });
-*/
-
-/*                if (arrFilter.filter(item => Boolean(item)).length) {
-                    arrFilter.forEach(function (itemFilter, iFilter, arrFilter) {
-                        if (itemFilter) {
-
-                            console.log('фильтр не пустой');
-                        }
-                    });
-                    allResult.forEach(function (itemCard, iCard, arrCard) {
-                        if (itemCard.category == filterCategory) {
-                            cardResult.push(itemCard);
-                        }
-                        // if (filterCategory.length && filterSale.length) {
-                        /!*if (item.category == filterCategory || String(item.isSale) == filterSale) {
-                            cardResult.push(item);
-                        }*!/
-                        /!*                    if (filterCategory.length) {
-                                                if (item.category == filterCategory) {
-                                                    cardResult.push(item);
-                                                }
-                                            }*!/
-                        // }
-                    });
-                } */
-
-                arrFilter.forEach(function (itemFilter, iFilter, arrFilter) {
-                    var values = Object.values(itemFilter);
-                    // console.log(values.filter(item => Boolean(item)).length);
-                });
-
-                if (arrFilter.filter(item => Boolean(item)).length) {
-                    arrFilter.forEach(function (itemFilter, iFilter, arrFilter) {
-                        if (itemFilter) {
-
-                            // console.log('фильтр не пустой');
-                        }
-                    });
-                    allResult.forEach(function (itemCard, iCard, arrCard) {
-                        if (itemCard.category == filterCategory) {
-                            cardResult.push(itemCard);
-                        }
-                    });
-                } else {
-                    cardResult = allResult;
+                    allFilter = {};
+                allFilter.category = filterCategory;
+                for (var key in allFilter) {
+                    if (allFilter[key] == 'Все категории') {
+                        cardResult = allResult
+                    } else cardResult = allResult.filter(item => item[key] == allFilter[key])
                 }
                 return cardResult;
             }
