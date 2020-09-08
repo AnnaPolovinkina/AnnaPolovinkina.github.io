@@ -1,11 +1,6 @@
 <template>
     <div>
         <h3>Каталог</h3>
-        <!--<Cart v-if="cart.length" v-bind:cardData="cart"></Cart>-->
-<!--        <router-link v-bind:to="{name: 'cart', params: {cardData: cart}}">
-            <div class="cart-btn">Корзина: {{cart.length}}</div>
-        </router-link>-->
-
         <SelectCategory v-on:changeFilter="filteredCategory"></SelectCategory>
         <br>
         <select v-model="filterSale">
@@ -55,7 +50,7 @@
                 this.addToCart(data);
             },
             filteredCategory(data) {
-                this.filterCategory = data; //Получает allCategory.name
+                this.filterCategory = data;
             }
         },
         computed: {
@@ -69,8 +64,6 @@
                     cardResult = [],
                     allFilter = [],
                     fillFilter;
-
-                /* Фильтрация элементов по 3 критериям */
                 allFilter.push({category: filterCategory},{isSale: filterSale},{price: filterPrice});
                 fillFilter = allFilter.filter(item => Boolean(String(Object.values(item))));
                 switch (fillFilter.length) {
@@ -125,7 +118,6 @@
                     default:
                         cardResult = allResult;
                 }
-                /* !Фильтрация элементов по 2 критериям */
                 return cardResult;
             }
         },
