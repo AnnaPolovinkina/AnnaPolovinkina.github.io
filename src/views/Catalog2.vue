@@ -9,12 +9,12 @@
         <SelectCategory v-on:changeFilter="filteredCategory"></SelectCategory>
         <br>
         <select v-model="filterSale">
-            <option value="all">Все товары</option>
+            <option value="">Все товары</option>
             <option value="true">Со скидкой</option>
             <option value="false">Без скидки</option>
         </select>
         <select v-model="filterPrice">
-            <option value="default">По умолчанию</option>
+            <option value="">По умолчанию</option>
             <option value="increment">По возрастанию</option>
             <option value="decrement">По убыванию</option>
         </select>
@@ -39,8 +39,8 @@
         data() {
             return {
                 filterCategory: '',
-                filterSale: 'all',
-                filterPrice: 'default',
+                filterSale: '',
+                filterPrice: '',
             }
         },
         components: {
@@ -55,7 +55,7 @@
                 this.addToCart(data);
             },
             filteredCategory(data) {
-                this.filterCategory = data;
+                this.filterCategory = data; //Получает allCategory.name
             }
         },
         computed: {
@@ -67,13 +67,61 @@
                     filterPrice = this.filterPrice,
                     allResult = this.$store.getters.allProducts,
                     cardResult = [],
-                    allFilter = {};
-                allFilter.category = filterCategory;
-                for (var key in allFilter) {
-                    if (allFilter[key] == 'Все категории') {
-                        cardResult = allResult
-                    } else cardResult = allResult.filter(item => item[key] == allFilter[key])
+                    allFilter = [],
+                    fillFilter;
+
+                /* Фильтрация элементов по 2 критериям */
+                allFilter.push({category: filterCategory},{isSale: filterSale});
+                fillFilter = allFilter.filter(item => Boolean(String(Object.values(item))));
+                switch (fillFilter.length) {
+                    case 1:
+                        var obj = fillFilter[0],
+                            key = String(Object.keys(obj));
+                        allResult.forEach(function (elem) {
+                            if (String(elem[key]) == obj[key]) {
+                                cardResult.push(elem);
+                            }
+                        });
+                        break;
+                    case 2:
+                        var obj1 = fillFilter[0],
+                            key1 = String(Object.keys(obj1)),
+                            obj2 = fillFilter[1],
+                            key2 = String(Object.keys(obj2));
+                        allResult.forEach(function (elem) {
+                            if (String(elem[key1]) == obj1[key1] && String(elem[key2]) == obj2[key2]) {
+                                cardResult.push(elem);
+                            }
+                        });
+                        break;
+                    default:
+                        cardResult = allResult;
                 }
+                /*if (!fillFilter.length) {
+                    cardResult = allResult;
+                }
+                if (fillFilter.length == 1) {
+                    var obj = fillFilter[0],
+                        key = String(Object.keys(obj));
+                    allResult.forEach(function (elem) {
+                        if (String(elem[key]) == obj[key]) {
+                            cardResult.push(elem);
+                        }
+                    });
+                }
+                if (fillFilter.length == 2) {
+                    var obj1 = fillFilter[0],
+                        key1 = String(Object.keys(obj1)),
+                        obj2 = fillFilter[1],
+                        key2 = String(Object.keys(obj2));
+                    allResult.forEach(function (elem) {
+                        if (String(elem[key1]) == obj1[key1] && String(elem[key2]) == obj2[key2]) {
+                            cardResult.push(elem);
+                        }
+                    });
+                }*/
+                /* !Фильтрация элементов по 2 критериям */
+
                 return cardResult;
             }
         },

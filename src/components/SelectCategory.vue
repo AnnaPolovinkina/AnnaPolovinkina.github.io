@@ -1,6 +1,6 @@
 <template>
         <select v-model="filter" v-on:change="changeFilter">
-            <option v-for="category in filteredOptions" v-bind:name="category.category">
+            <option v-for="category in filteredOptions" v-bind:name="category.name">
                 {{ category.category }}
             </option>
         </select>
@@ -14,6 +14,7 @@
         data() {
             return {
                 filter: '',
+                allCategory: []
             }
         },
         computed: {
@@ -22,26 +23,37 @@
                 var allResult = this.$store.getters.allProducts,
                     categoryResult = [],
                     jsonCategory;
-                allResult.forEach(function (item, i, arr) {
+                allResult.forEach(function (item) {
                     jsonCategory = item.category;
                     if (!categoryResult.includes(jsonCategory)) {
                         categoryResult.push(jsonCategory);
                     }
                 });
-                categoryResult = categoryResult.map(function (item, index,array) {
-                    return {category: item};
+                categoryResult = categoryResult.map(function (item) {
+                    return {name: item, category: item};
                 });
-                categoryResult.unshift({category: 'Все категории'});
+                categoryResult.unshift({name: '', category: 'Все категории'});
+                this.allCategory = categoryResult;
                 return categoryResult;
             }
         },
         mounted() {
-            this.filter = 'Все категории';
-            this.$emit('changeFilter', this.filter);
+            var vm  = this;
+            vm.filter = 'Все категории';
+            vm.allCategory.forEach(function (elem) {
+                if (elem.category === vm.filter) {
+                    vm.$emit('changeFilter', elem.name);
+                }
+            });
         },
         methods: {
             changeFilter() {
-                this.$emit('changeFilter', this.filter);
+                var vm  = this;
+                vm.allCategory.forEach(function (elem) {
+                    if (elem.category === vm.filter) {
+                        vm.$emit('changeFilter', elem.name);
+                    }
+                });
             }
         },
     }
