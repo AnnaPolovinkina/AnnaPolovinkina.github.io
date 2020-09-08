@@ -70,8 +70,8 @@
                     allFilter = [],
                     fillFilter;
 
-                /* Фильтрация элементов по 2 критериям */
-                allFilter.push({category: filterCategory},{isSale: filterSale});
+                /* Фильтрация элементов по 3 критериям */
+                allFilter.push({category: filterCategory},{isSale: filterSale},{price: filterPrice});
                 fillFilter = allFilter.filter(item => Boolean(String(Object.values(item))));
                 switch (fillFilter.length) {
                     case 1:
@@ -94,34 +94,38 @@
                             }
                         });
                         break;
+                    case 3:
+                        var obj1 = fillFilter[0],
+                            key1 = String(Object.keys(obj1)),
+                            obj2 = fillFilter[1],
+                            key2 = String(Object.keys(obj2)),
+                            obj3 = fillFilter[2],
+                            value3 = String(Object.values(obj3));
+                        allResult.forEach(function (elem) {
+                            if (String(elem[key1]) == obj1[key1] && String(elem[key2]) == obj2[key2]) {
+                                cardResult.push(elem);
+                            }
+                        });
+                        for (var i = 0; i < cardResult.length; i++) {
+                            for (var j = i; j < cardResult.length; j++) {
+                                var conditionLoop;
+                                if (value3 == 'increment') {
+                                    conditionLoop = cardResult[i].price > cardResult[j].price
+                                } else {
+                                    conditionLoop = cardResult[i].price < cardResult[j].price
+                                }
+                                if (conditionLoop) {
+                                    var temp = cardResult[i];
+                                    cardResult[i] = cardResult[j];
+                                    cardResult[j] = temp;
+                                }
+                              }
+                            }
+                        break;
                     default:
                         cardResult = allResult;
                 }
-                /*if (!fillFilter.length) {
-                    cardResult = allResult;
-                }
-                if (fillFilter.length == 1) {
-                    var obj = fillFilter[0],
-                        key = String(Object.keys(obj));
-                    allResult.forEach(function (elem) {
-                        if (String(elem[key]) == obj[key]) {
-                            cardResult.push(elem);
-                        }
-                    });
-                }
-                if (fillFilter.length == 2) {
-                    var obj1 = fillFilter[0],
-                        key1 = String(Object.keys(obj1)),
-                        obj2 = fillFilter[1],
-                        key2 = String(Object.keys(obj2));
-                    allResult.forEach(function (elem) {
-                        if (String(elem[key1]) == obj1[key1] && String(elem[key2]) == obj2[key2]) {
-                            cardResult.push(elem);
-                        }
-                    });
-                }*/
                 /* !Фильтрация элементов по 2 критериям */
-
                 return cardResult;
             }
         },
