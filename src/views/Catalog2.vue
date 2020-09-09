@@ -68,6 +68,20 @@
                         }
                     }
                 }
+            },
+            sortOneSelect(obj, key, arrCards, arrResultCards) {
+                arrCards.forEach(function (elem) {
+                    if (String(elem[key]) == obj[key]) {
+                        arrResultCards.push(elem);
+                    }
+                });
+            },
+            sortTwoSelect(obj1, key1, obj2, key2, arrCards, arrResultCards) {
+                arrCards.forEach(function (elem) {
+                    if (String(elem[key1]) == obj1[key1] && String(elem[key2]) == obj2[key2]) {
+                        arrResultCards.push(elem);
+                    }
+                });
             }
         },
         computed: {
@@ -88,11 +102,7 @@
                         var obj = fillFilter[0],
                             key = String(Object.keys(obj));
                         if (key !== 'price') {
-                            allResult.forEach(function (elem) {
-                                if (String(elem[key]) == obj[key]) {
-                                    cardResult.push(elem);
-                                }
-                            });
+                            this.sortOneSelect(obj, key, allResult, cardResult);
                         } else {
                             cardResult = allResult;
                             this.sortCardPrice(obj[key], cardResult);
@@ -105,17 +115,9 @@
                             key2 = String(Object.keys(obj2));
 
                         if (key2 !== 'price') {
-                            allResult.forEach(function (elem) {
-                                if (String(elem[key1]) == obj1[key1] && String(elem[key2]) == obj2[key2]) {
-                                    cardResult.push(elem);
-                                }
-                            });
+                            this.sortTwoSelect(obj1, key1, obj2, key2, allResult, cardResult);
                         } else {
-                            allResult.forEach(function (elem) {
-                                if (String(elem[key1]) == obj1[key1]) {
-                                    cardResult.push(elem);
-                                }
-                            });
+                            this.sortOneSelect(obj1, key1, allResult, cardResult);
                             this.sortCardPrice(obj2[key2], cardResult);
                         }
                         break;
@@ -126,11 +128,7 @@
                             key2 = String(Object.keys(obj2)),
                             obj3 = fillFilter[2],
                             value3 = String(Object.values(obj3));
-                        allResult.forEach(function (elem) {
-                            if (String(elem[key1]) == obj1[key1] && String(elem[key2]) == obj2[key2]) {
-                                cardResult.push(elem);
-                            }
-                        });
+                        this.sortTwoSelect(obj1, key1, obj2, key2, allResult, cardResult);
                         this.sortCardPrice(value3, cardResult);
                         break;
                     default:
