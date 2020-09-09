@@ -8,21 +8,33 @@
                 v-on:incrementPage="incrementPage"
                 v-on:decrementPage="decrementPage"
         ></Pagination>
-        <SelectCategory v-on:changeFilter="filteredCategory"></SelectCategory>
+        <SelectCategory
+                v-on:changeFilter="filteredCategory"
+                v-on:resetPage="resetPage"
+        ></SelectCategory>
         <br>
-        <select v-model="filterSale">
+        <select
+                v-model="filterSale"
+                v-on:change="resetPage"
+        >
             <option value="">Все товары</option>
             <option value="true">Со скидкой</option>
             <option value="false">Без скидки</option>
         </select>
-        <select v-model="filterPrice">
+        <select
+                v-model="filterPrice"
+        >
             <option value="">По умолчанию</option>
             <option value="increment">По возрастанию</option>
             <option value="decrement">По убыванию</option>
         </select>
         <br>
         <div class="row">
-            <ProductCard2 v-for="card in filteredCards" v-bind:card="card" v-on:addCardToCart="toCart"></ProductCard2>
+            <ProductCard2
+                    v-for="card in filteredCards"
+                    v-bind:card="card"
+                    v-on:addCardToCart="toCart"
+            ></ProductCard2>
         </div>
         <InfoPopup></InfoPopup>
     </div>
@@ -108,6 +120,9 @@
                 if (this.pageNumber > 1) {
                     this.pageNumber--;
                 }
+            },
+            resetPage() {
+                this.pageNumber = 1;
             }
         },
         computed: {

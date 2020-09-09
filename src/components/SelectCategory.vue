@@ -1,6 +1,12 @@
 <template>
-        <select v-model="filter" v-on:change="changeFilter">
-            <option v-for="category in filteredOptions" v-bind:name="category.name">
+        <select
+                v-model="filter"
+                v-on:change="changeFilter"
+        >
+            <option
+                    v-for="category in filteredOptions"
+                    v-bind:name="category.name"
+            >
                 {{ category.category }}
             </option>
         </select>
@@ -54,6 +60,7 @@
                         vm.$emit('changeFilter', elem.name);
                     }
                 });
+                vm.$emit('resetPage');
             }
         },
     }
