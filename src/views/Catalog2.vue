@@ -51,6 +51,23 @@
             },
             filteredCategory(data) {
                 this.filterCategory = data;
+            },
+            sortCardPrice(valueSort, arrCards) {
+                for (var i = 0; i < arrCards.length; i++) {
+                    for (var j = i; j < arrCards.length; j++) {
+                        var conditionLoop;
+                        if (valueSort == 'increment') {
+                            conditionLoop = +arrCards[i].price > +arrCards[j].price
+                        } else {
+                            conditionLoop = +arrCards[i].price < +arrCards[j].price
+                        }
+                        if (conditionLoop) {
+                            var temp = arrCards[i];
+                            arrCards[i] = arrCards[j];
+                            arrCards[j] = temp;
+                        }
+                    }
+                }
             }
         },
         computed: {
@@ -70,22 +87,37 @@
                     case 1:
                         var obj = fillFilter[0],
                             key = String(Object.keys(obj));
-                        allResult.forEach(function (elem) {
-                            if (String(elem[key]) == obj[key]) {
-                                cardResult.push(elem);
-                            }
-                        });
+                        if (key !== 'price') {
+                            allResult.forEach(function (elem) {
+                                if (String(elem[key]) == obj[key]) {
+                                    cardResult.push(elem);
+                                }
+                            });
+                        } else {
+                            cardResult = allResult;
+                            this.sortCardPrice(obj[key], cardResult);
+                        }
                         break;
                     case 2:
                         var obj1 = fillFilter[0],
                             key1 = String(Object.keys(obj1)),
                             obj2 = fillFilter[1],
                             key2 = String(Object.keys(obj2));
-                        allResult.forEach(function (elem) {
-                            if (String(elem[key1]) == obj1[key1] && String(elem[key2]) == obj2[key2]) {
-                                cardResult.push(elem);
-                            }
-                        });
+
+                        if (key2 !== 'price') {
+                            allResult.forEach(function (elem) {
+                                if (String(elem[key1]) == obj1[key1] && String(elem[key2]) == obj2[key2]) {
+                                    cardResult.push(elem);
+                                }
+                            });
+                        } else {
+                            allResult.forEach(function (elem) {
+                                if (String(elem[key1]) == obj1[key1]) {
+                                    cardResult.push(elem);
+                                }
+                            });
+                            this.sortCardPrice(obj2[key2], cardResult);
+                        }
                         break;
                     case 3:
                         var obj1 = fillFilter[0],
@@ -99,21 +131,7 @@
                                 cardResult.push(elem);
                             }
                         });
-                        for (var i = 0; i < cardResult.length; i++) {
-                            for (var j = i; j < cardResult.length; j++) {
-                                var conditionLoop;
-                                if (value3 == 'increment') {
-                                    conditionLoop = cardResult[i].price > cardResult[j].price
-                                } else {
-                                    conditionLoop = cardResult[i].price < cardResult[j].price
-                                }
-                                if (conditionLoop) {
-                                    var temp = cardResult[i];
-                                    cardResult[i] = cardResult[j];
-                                    cardResult[j] = temp;
-                                }
-                              }
-                            }
+                        this.sortCardPrice(value3, cardResult);
                         break;
                     default:
                         cardResult = allResult;
