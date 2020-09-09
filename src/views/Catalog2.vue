@@ -1,6 +1,13 @@
 <template>
     <div>
         <h3>Каталог</h3>
+        <Pagination
+                v-bind:pages="pages"
+                v-on:changePage="changePageNumber"
+                v-bind:pageNumber="pageNumber"
+                v-on:incrementPage="incrementPage"
+                v-on:decrementPage="decrementPage"
+        ></Pagination>
         <SelectCategory v-on:changeFilter="filteredCategory"></SelectCategory>
         <br>
         <select v-model="filterSale">
@@ -28,6 +35,7 @@
     import SelectCategory from '@/components/SelectCategory'
     import InfoPopup from '@/components/InfoPopup'
     import Cart from  '@/components/Cart'
+    import Pagination from  '@/components/Pagination'
 
     export default {
         name: 'Catalog',
@@ -36,13 +44,18 @@
                 filterCategory: '',
                 filterSale: '',
                 filterPrice: '',
+                cardResultSort: [],
+                cardPerPage: 6,
+                pageNumber: 1,
+                countPages: ''
             }
         },
         components: {
             ProductCard2: ProductCard2,
             SelectCategory: SelectCategory,
             InfoPopup: InfoPopup,
-            Cart: Cart
+            Cart: Cart,
+            Pagination: Pagination,
         },
         methods: {
             ...mapActions(['addToCart']),
@@ -82,6 +95,19 @@
                         arrResultCards.push(elem);
                     }
                 });
+            },
+            changePageNumber(data) {
+                this.pageNumber = data;
+            },
+            incrementPage() {
+                if (this.pageNumber < this.countPages) {
+                    this.pageNumber++;
+                }
+            },
+            decrementPage() {
+                if (this.pageNumber > 1) {
+                    this.pageNumber--;
+                }
             }
         },
         computed: {
@@ -134,8 +160,15 @@
                     default:
                         cardResult = allResult;
                 }
+                this.cardResultSort = cardResult;
+                var from = (this.pageNumber - 1) * this.cardPerPage;
+                var to = from + this.cardPerPage;
+                cardResult = cardResult.slice(from, to);
                 return cardResult;
-            }
+            },
+            pages() {
+                return this.countPages = Math.ceil(this.cardResultSort.length / this.cardPerPage);
+            },
         },
     }
 

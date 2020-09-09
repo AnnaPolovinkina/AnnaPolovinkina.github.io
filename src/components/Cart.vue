@@ -17,6 +17,7 @@
         <div class="cart-total">
             Итого: <span class="cart-total-sum">{{cartTotalSum}} Р.</span>
         </div>
+        <button v-if="cardData.length">Оформить заказ</button>
     </div>
 </template>
 

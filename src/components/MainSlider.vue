@@ -30,6 +30,7 @@
                         <div class="banner-slide__text-descripttion">
                             {{banner.description}}
                         </div>
+                        <button>Перейти в каталог</button>
                     </div>
                 </template>
             </b-carousel-slide>
