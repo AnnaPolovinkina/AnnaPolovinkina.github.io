@@ -11,7 +11,7 @@ export default {
         async fetchProducts(ctx) {
             axios
                 .get('http://www.json-generator.com/api/json/get/cfkAhblmZK?indent=2')
-                .then(response => { info = response.data; ctx.commit('updateProducts', info); console.log(123) }); //Массив из json
+                .then(response => { info = response.data; ctx.commit('updateProducts', info);}); //Массив из json
         },
         fillCategoriesProducts({commit}, arrJson) {
             commit('addCategoriesProducts', arrJson);

@@ -56,7 +56,6 @@
                 categoryResult = categoryResult.map(function (item) {
                     return {name: item, category: item};
                 });
-                console.log(categoryResult);
                 return categoryResult;
             }
         }

@@ -1,5 +1,5 @@
 <template>
-    <div id="productCard" class="col-lg-4 col-md-6 col-xs-12">
+    <div id="productCard" class="col-lg-4 col-md-6 col-xs-12" v-bind:class="slideClass">
         <a class="card-wrapper">
             <div class="card-picture">
                 <img v-bind:src="card.img_preview">
@@ -10,7 +10,7 @@
             </div>
             <div class="card-description">
                 <h5 class="card-title">{{card.title}}</h5>
-                <p class="card-text">{{card.description}}</p>
+                <!--<p class="card-text">{{card.description}}</p>-->
                 <p class="card-price">{{card.price}}</p>
                 <p class="card-category">{{card.category}}</p>
                 <a href="#" class="btn card-btn" v-on:click="addCardToCart">В корзину</a>
@@ -30,13 +30,16 @@
             card: {
                 type: Object,
                 required: true
+            },
+            slideClass: {
+                type: String
             }
         },
         methods: {
             addCardToCart() {
                 this.$emit('addCardToCart', this.card);
             }
-        }
+        },
     }
 </script>
 
