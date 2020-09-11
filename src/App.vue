@@ -60,8 +60,21 @@
     position: relative;
     z-index: 1;
   }
-/*  html, body, #app {
+  html, body {
     height: 100%;
-  }*/
+  }
+  main {
+    height: 100%;
+    display: flex !important;
+    flex-direction: column;
+  }
+  #header {
+    /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
+    flex: 0 0 auto;
+  }
+  .wrapper {
+    /* 1 flex-grow, 0 flex-shrink, auto flex-basis */
+    flex: 1 0 auto;
+  }
 </style>
 
