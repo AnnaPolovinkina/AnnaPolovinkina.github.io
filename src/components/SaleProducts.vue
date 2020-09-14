@@ -8,14 +8,21 @@
                 >
                 </ProductCard2>
             <div class="swiper-pagination" slot="pagination"></div>
+
+            <div class="sale-product-slider_navigation">
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+
         </swiper>
+
     </div>
 </template>
 
 <script>
     import ProductCard2 from '@/components/ProductCard2'
     import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
-    import 'swiper/swiper-bundle.css'
+    import 'swiper/css/swiper.css'
 
     export default {
         name: "SaleProducts",
@@ -24,7 +31,12 @@
               swiperOptions: {
                   pagination: {
                       el: '.swiper-pagination'
-                  }
+                  },
+                  navigation: {
+                      nextEl: '.swiper-button-next',
+                      prevEl: '.swiper-button-prev'
+                  },
+                  slidesPerView: 3
               }
           }
         },
