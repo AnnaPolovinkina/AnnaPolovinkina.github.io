@@ -22,6 +22,11 @@ export default new Router({
             component: () => import('./views/Catalog2.vue')
         },
         {
+            path: '/product',
+            name: 'product',
+            component: () => import('./components/ProductPage.vue')
+        },
+        {
             path: '/cart',
             name: 'cart',
             component: () => import('./components/Cart.vue'),

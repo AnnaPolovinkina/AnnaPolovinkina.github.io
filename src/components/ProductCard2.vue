@@ -1,5 +1,10 @@
 <template>
-    <div id="productCard" class="col-lg-4 col-md-6 col-xs-12" v-bind:class="slideClass">
+    <div
+            id="productCard"
+            class="col-lg-4 col-md-6 col-xs-12"
+            v-bind:class="slideClass"
+            v-on:click="openProductPage"
+    >
         <a class="card-wrapper">
             <div class="card-picture">
                 <img v-bind:src="card.img_preview">
@@ -38,6 +43,10 @@
         methods: {
             addCardToCart() {
                 this.$emit('addCardToCart', this.card);
+            },
+            openProductPage() {
+                console.log(this.card.id);
+                this.$router.push({name: 'product', query: {'product': this.card.id}});
             }
         },
     }
