@@ -44,13 +44,19 @@
             }
         },
         mounted() {
-            var vm  = this;
-            vm.filter = 'Все категории';
-            vm.allCategory.forEach(function (elem) {
-                if (elem.category === vm.filter) {
-                    vm.$emit('changeFilter', elem.name);
-                }
-            });
+            var goCatalog = this.$route.params.fromSliderToCatalog;
+            if (goCatalog) {
+                this.filter = goCatalog;
+                this.$emit('changeFilter', goCatalog);
+            } else {
+                var vm  = this;
+                vm.filter = 'Все категории';
+                vm.allCategory.forEach(function (elem) {
+                    if (elem.category === vm.filter) {
+                        vm.$emit('changeFilter', elem.name);
+                    }
+                });
+            }
         },
         methods: {
             changeFilter() {
@@ -62,7 +68,7 @@
                 });
                 vm.$emit('resetPage');
             }
-        },
+        }
     }
 </script>
 

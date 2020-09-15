@@ -183,8 +183,8 @@
             },
             pages() {
                 return this.countPages = Math.ceil(this.cardResultSort.length / this.cardPerPage);
-            },
-        },
+            }
+        }
     }
 
 </script>

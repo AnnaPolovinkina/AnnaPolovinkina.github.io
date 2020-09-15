@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <swiper ref="mySwiper" :options="swiperOptions">
+        <swiper class="swiper" :options="swiperOptions">
                 <ProductCard2
                         v-for="card in sales"
                         v-bind:card="card"
@@ -8,12 +8,8 @@
                 >
                 </ProductCard2>
             <div class="swiper-pagination" slot="pagination"></div>
-
-            <div class="sale-product-slider_navigation">
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
-
+            <div class="swiper-button-next" slot="button-prev"></div>
+            <div class="swiper-button-prev" slot="button-next"></div>
         </swiper>
 
     </div>

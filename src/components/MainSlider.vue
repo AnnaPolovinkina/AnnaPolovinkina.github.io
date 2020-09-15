@@ -30,7 +30,11 @@
                         <div class="banner-slide__text-descripttion">
                             {{banner.description}}
                         </div>
-                        <button>Перейти в каталог</button>
+
+                        <router-link v-bind:to="{name: 'catalog2', params: {fromSliderToCatalog: banner.title}}">
+                            <button>Перейти в каталог: {{banner.title}}</button>
+                        </router-link>
+
                     </div>
                 </template>
             </b-carousel-slide>
@@ -46,10 +50,10 @@
                 slide: 0,
                 sliding: null,
                 banners: [
-                    {id: 1, title: 'Сумки', description: 'Клевые сумки', url: '/banner/1.jpg'},
-                    {id: 2, title: 'Очки', description: 'Офигенные очки', url: '/banner/2.jpg'},
-                    {id: 3, title: 'Перчатки', description: 'Классные перчатки', url: '/banner/3.jpg'},
-                    {id: 4, title: 'Кошельки', description: 'Крутые кошельки', url: '/banner/4.jpg'}
+                    {id: 1, title: 'brown', description: 'Клевые сумки', url: '/banner/1.jpg'},
+                    {id: 2, title: 'blue', description: 'Офигенные кошельки', url: '/banner/2.jpg'},
+                    {id: 3, title: 'green', description: 'Классные очки', url: '/banner/3.jpg'},
+                    {id: 4, title: 'red', description: 'Крутые перчатки', url: '/banner/4.jpg'}
                 ]
             }
         }
