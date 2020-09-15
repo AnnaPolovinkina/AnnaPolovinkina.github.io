@@ -46,18 +46,33 @@
         watch: {
             '$route' (to, from) {
                 var goCatalog = to.params.fromSliderToCatalog;
-                this.filter = goCatalog;
-                this.$emit('changeFilter', goCatalog);
-                this.$route.params.fromSliderToCatalog = '';
+                if (goCatalog || typeof goCatalog !== "undefined") {
+                    console.log(true);
+                    this.filter = goCatalog;
+                    this.$emit('changeFilter', goCatalog);
+                    this.$route.params.fromSliderToCatalog = '';
+                } else {
+                    console.log(false);
+                    var vm  = this;
+                    vm.filter = 'Все категории';
+                    vm.allCategory.forEach(function (elem) {
+                        if (elem.category === vm.filter) {
+                            vm.$emit('changeFilter', elem.name);
+                        }
+                    });
+                }
+                console.log(goCatalog);
             }
         },
         mounted() {
             var goCatalog = this.$route.params.fromSliderToCatalog;
-            if (goCatalog) {
+            if (goCatalog || typeof goCatalog !== "undefined") {
+                console.log(true);
                 this.filter = goCatalog;
                 this.$emit('changeFilter', goCatalog);
                 this.$route.params.fromSliderToCatalog = '';
             } else {
+                console.log(false);
                 var vm  = this;
                 vm.filter = 'Все категории';
                 vm.allCategory.forEach(function (elem) {
