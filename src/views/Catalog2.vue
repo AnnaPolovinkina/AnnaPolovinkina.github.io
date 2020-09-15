@@ -33,7 +33,6 @@
             <ProductCard2
                     v-for="card in filteredCards"
                     v-bind:card="card"
-                    v-on:addCardToCart="toCart"
             ></ProductCard2>
         </div>
         <InfoPopup></InfoPopup>
@@ -70,10 +69,6 @@
             Pagination: Pagination,
         },
         methods: {
-            ...mapActions(['addToCart']),
-            toCart(data) {
-                this.addToCart(data);
-            },
             filteredCategory(data) {
                 this.filterCategory = data;
             },

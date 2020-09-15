@@ -73,4 +73,7 @@
     .card-item__caption {
         font-weight: bold;
     }
+    .cart-item img {
+        width: 100px;
+    }
 </style>

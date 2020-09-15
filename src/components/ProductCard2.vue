@@ -3,23 +3,23 @@
             id="productCard"
             class="col-lg-4 col-md-6 col-xs-12"
             v-bind:class="slideClass"
-            v-on:click="openProductPage"
     >
         <a class="card-wrapper">
             <div class="card-picture">
                 <img v-bind:src="card.img_preview">
-
-                <div class="card-overlay">
+                <!--<div class="card-overlay">
                     <button type="button" @click="$bvModal.show('bv-modal-example')" class="btn card-btn js__popup">Подробнее</button>
-                </div>
+                </div>-->
             </div>
             <div class="card-description">
                 <h5 class="card-title">{{card.title}}</h5>
-                <!--<p class="card-text">{{card.description}}</p>-->
                 <p class="card-price">{{card.price}}</p>
-                <p class="card-category">{{card.category}}</p>
-                <a href="#" class="btn card-btn" v-on:click="addCardToCart">В корзину</a>
-
+                <p>
+                    <button class="btn card-btn show-more" v-on:click="openProductPage">Подробнее</button>
+                </p>
+                <p>
+                    <button class="btn card-btn add-cart" v-on:click="addCardToCart">В корзину</button>
+                </p>
                 <div v-if="card.isSale" class="sale">
                     <span>Скидка</span>
                 </div>
@@ -29,6 +29,8 @@
 </template>
 
 <script>
+    import {mapActions} from 'vuex'
+
     export default {
         name: "ProductCard",
         props: {
@@ -41,11 +43,11 @@
             }
         },
         methods: {
+            ...mapActions(['addToCart']),
             addCardToCart() {
-                this.$emit('addCardToCart', this.card);
+                this.addToCart(this.card);
             },
             openProductPage() {
-                console.log(this.card.id);
                 this.$router.push({name: 'product', query: {'product': this.card.id}});
             }
         },
@@ -83,10 +85,6 @@
         position: relative;
         overflow: hidden;
     }
-    .card-text {
-        max-height: 190px;
-        overflow: hidden;
-    }
     .card-price {
         position: relative;
         display: inline-block;
@@ -99,7 +97,7 @@
         left: auto;
         right: -13px;
     }
-    .card-btn {
+    .add-cart {
         background-color: #ef98aa;
         color: #FFFFFF;
     }
@@ -127,27 +125,9 @@
         right: -66px;
         transform: rotate(-45deg);
     }
-    .card-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-    }
-    .card-overlay .btn {
-        display: inline-block;
-        width: auto;
-        height: 38px;
+    .show-more {
         background: gray;
         color: #FFFFFF;
-        position: relative;
-        top: calc(50% - 19px);
-        opacity: 0;
-        transition: 0.2s ease-in-out all;
-    }
-    .card-wrapper:hover .card-overlay .btn {
-        opacity: 1;
     }
     .card-wrapper:hover .card-picture img {
         transform: scale(1.3);
