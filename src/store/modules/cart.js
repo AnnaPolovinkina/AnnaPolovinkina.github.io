@@ -50,6 +50,13 @@ export default {
     getters: {
         cart(state) {
             return state.cart;
+        },
+        cartCount(state) {
+            var result = 0;
+            state.cart.forEach(function (elem, index) {
+                result = result + elem.count;
+            });
+            return result;
         }
     },
 }

@@ -45,9 +45,6 @@
             decrement() {
                 this.$emit('decrementCount');
             }
-        },
-        mounted() {
-            this.$set(this.cartItemData, 'count', 1)
         }
 
     }

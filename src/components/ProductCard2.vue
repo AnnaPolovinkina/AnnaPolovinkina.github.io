@@ -51,6 +51,9 @@
                 this.$router.push({name: 'product', query: {'product': this.card.id}});
             }
         },
+        mounted() {
+            this.$set(this.card, 'count', 1)
+        }
     }
 </script>
 

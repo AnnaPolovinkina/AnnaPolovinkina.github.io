@@ -23,7 +23,7 @@
                         <div class="cart">
                             <img src="@/assets/cart1.png" alt="Корзина">
                             <div class="count-products">
-                                {{cart.length}}
+                                {{cartCount}}
                             </div>
                         </div>
                         </router-link>
@@ -46,7 +46,8 @@
             Cart: Cart
         },
         computed: {
-            ...mapGetters(['cart'])
+            ...mapGetters(['cart']),
+            ...mapGetters(['cartCount'])
         }
     }
 </script>
