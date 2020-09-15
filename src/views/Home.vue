@@ -4,9 +4,9 @@
         <a href="/catalog">
             Перейти в каталог
         </a>
-        <a href="/catalog2">
+        <router-link v-bind:to="{name: 'catalog2'}">
             Перейти в каталог 2
-        </a>
+        </router-link>
 
         <!--v-bind:category="category.name"-->
 

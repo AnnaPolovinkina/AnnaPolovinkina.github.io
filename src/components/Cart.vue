@@ -17,7 +17,10 @@
         <div class="cart-total">
             Итого: <span class="cart-total-sum">{{cartTotalSum}} Р.</span>
         </div>
-        <button v-if="cardData.length">Оформить заказ</button>
+
+        <router-link v-bind:to="{name: 'order', params: {cardData: cardData}}">
+            <button v-if="cardData.length">Оформить заказ</button>
+        </router-link>
     </div>
 </template>
 

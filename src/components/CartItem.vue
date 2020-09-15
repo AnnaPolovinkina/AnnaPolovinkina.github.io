@@ -2,7 +2,7 @@
     <div class="cart-item">
         <img v-bind:src="cartItemData.img_preview" alt="">
         <div class="cart-item_title">{{cartItemData.title}}</div>
-        <div class="cart-item_description">{{cartItemData.description}}</div>
+        <!--<div class="cart-item_description">{{cartItemData.description}}</div>-->
         <div class="cart-item_price">
             <div class="card-item__caption">Цена</div>
             <div>{{cartItemData.price}}</div>

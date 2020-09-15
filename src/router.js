@@ -9,6 +9,7 @@ export default new Router({
     routes: [
         {
             path: '/',
+            name: 'home',
             component: Home
         },
         {
@@ -30,6 +31,12 @@ export default new Router({
             path: '/cart',
             name: 'cart',
             component: () => import('./components/Cart.vue'),
+            props: true
+        },
+        {
+            path: '/order',
+            name: 'order',
+            component: () => import('./views/Order.vue'),
             props: true
         }
     ]

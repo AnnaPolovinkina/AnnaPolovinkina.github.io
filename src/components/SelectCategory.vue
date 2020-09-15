@@ -43,11 +43,20 @@
                 return categoryResult;
             }
         },
+        watch: {
+            '$route' (to, from) {
+                var goCatalog = to.params.fromSliderToCatalog;
+                this.filter = goCatalog;
+                this.$emit('changeFilter', goCatalog);
+                this.$route.params.fromSliderToCatalog = '';
+            }
+        },
         mounted() {
             var goCatalog = this.$route.params.fromSliderToCatalog;
             if (goCatalog) {
                 this.filter = goCatalog;
                 this.$emit('changeFilter', goCatalog);
+                this.$route.params.fromSliderToCatalog = '';
             } else {
                 var vm  = this;
                 vm.filter = 'Все категории';

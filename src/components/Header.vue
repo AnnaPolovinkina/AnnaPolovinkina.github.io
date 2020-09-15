@@ -4,9 +4,9 @@
             <div class="header-wrapper">
                 <div class="row justify-content">
                     <div class="col-xl-2 logo">
-                        <a href="/">
-                            <img src="@/assets/logo1.jpg" alt="Логотип">
-                        </a>
+                            <router-link v-bind:to="{name: 'home'}">
+                                <img src="@/assets/logo1.jpg" alt="Логотип">
+                            </router-link>
                     </div>
                     <div class="col-xl-8 title">
                         <h3 style="font-family: 'Marck Script', cursive;">
