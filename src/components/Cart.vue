@@ -1,8 +1,8 @@
 <template>
     <div>
         <router-link v-bind:to="{name: 'catalog2'}">
-                            <div class="cart-btn">Обратно в каталог</div>
-                        </router-link>
+            <div class="cart-btn">Обратно в каталог</div>
+        </router-link>
         <h3>Корзина</h3>
 
         <div v-if="!cardData.length">Корзина пуста</div>
@@ -14,12 +14,15 @@
                 v-on:decrementCount="decrementItemCart(index)"
         ></CartItem>
 
-        <div class="cart-total">
+        <div class="cart-total" v-if="cardData.length">
             Итого: <span class="cart-total-sum">{{cartTotalSum}} Р.</span>
         </div>
 
-        <router-link v-bind:to="{name: 'order', params: {cardData: cardData}}">
-            <button v-if="cardData.length">Оформить заказ</button>
+        <router-link
+                v-if="cardData.length"
+                v-bind:to="{name: 'order', params: {cardData: cardData}}"
+        >
+            <button>Оформить заказ</button>
         </router-link>
     </div>
 </template>
@@ -35,7 +38,10 @@
         },
         props: {
             cardData: {
-                type: Array
+                type: Array,
+                default() {
+                    return this.$store.getters.cart;
+                }
             }
         },
         computed: {
@@ -65,7 +71,7 @@
             decrementItemCart(index) {
                 this.decrementCartItem(index);
             }
-        },
+        }
     }
 </script>
 
