@@ -7,20 +7,31 @@
         <a class="card-wrapper">
             <div class="card-picture">
                 <img v-bind:src="card.img_preview">
-                <!--<div class="card-overlay">
-                    <button type="button" @click="$bvModal.show('bv-modal-example')" class="btn card-btn js__popup">Подробнее</button>
-                </div>-->
+
             </div>
             <div class="card-description">
                 <h5 class="card-title">{{card.title}}</h5>
                 <p class="card-price">{{card.price}}</p>
                 <p>
-                    <button class="btn card-btn show-more" v-on:click="openProductPage">Подробнее</button>
+                    <button
+                            class="btn card-btn show-more"
+                            v-on:click="openProductPage"
+                    >
+                        Подробнее
+                    </button>
                 </p>
                 <p>
-                    <button class="btn card-btn add-cart" v-on:click="addCardToCart">В корзину</button>
+                    <button
+                            class="btn card-btn add-cart"
+                            v-on:click="addCardToCart"
+                    >
+                        В корзину
+                    </button>
                 </p>
-                <div v-if="card.isSale" class="sale">
+                <div
+                        v-if="card.isSale"
+                        class="sale"
+                >
                     <span>Скидка</span>
                 </div>
             </div>
@@ -33,6 +44,11 @@
 
     export default {
         name: "ProductCard",
+        data() {
+          return {
+              thisCard: {}
+          }
+        },
         props: {
             card: {
                 type: Object,
@@ -45,14 +61,15 @@
         methods: {
             ...mapActions(['addToCart']),
             addCardToCart() {
-                this.addToCart(this.card);
+                this.addToCart(this.thisCard);
             },
             openProductPage() {
                 this.$router.push({name: 'product', query: {'product': this.card.id}});
             }
         },
         mounted() {
-            this.$set(this.card, 'count', 1)
+            this.thisCard = this.card;
+            this.$set(this.thisCard, 'count', 1);
         }
     }
 </script>
