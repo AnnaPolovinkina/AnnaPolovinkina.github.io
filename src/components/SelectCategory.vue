@@ -69,7 +69,7 @@
                 this.$route.params.fromSliderToCatalog = '';
             } else {
                 var vm  = this;
-                vm.filter = 'Все категории';
+                vm.filter = this.$store.getters.getCategory;
                 vm.allCategory.forEach(function (elem) {
                     if (elem.category === vm.filter) {
                         vm.$emit('changeFilter', elem.name);
@@ -86,8 +86,9 @@
                     }
                 });
                 vm.$emit('resetPage');
+                this.$store.dispatch('changeCategory', vm.filter);
             }
-        }
+        },
     }
 </script>
 

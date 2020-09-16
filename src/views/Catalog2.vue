@@ -23,6 +23,7 @@
         </select>
         <select
                 v-model="filterPrice"
+                v-on:change="savePrice"
         >
             <option value="">По умолчанию</option>
             <option value="increment">По возрастанию</option>
@@ -67,6 +68,11 @@
             InfoPopup: InfoPopup,
             Cart: Cart,
             Pagination: Pagination,
+        },
+        mounted() {
+          this.filterSale = this.$store.getters.getSale;
+          console.log(this.$store.getters.getSale);
+          // this.filterPrice = this.$store.getters.getPrice;
         },
         methods: {
             filteredCategory(data) {
@@ -118,6 +124,10 @@
             },
             resetPage() {
                 this.pageNumber = 1;
+                this.$store.dispatch('changeSale', this.filterSale)
+            },
+            savePrice() {
+                // this.$store.dispatch('changeSale', this.filterPrice)
             }
         },
         computed: {
@@ -132,6 +142,7 @@
                     allFilter = [],
                     fillFilter;
                 allFilter.push({category: filterCategory},{isSale: filterSale},{price: filterPrice});
+                // this.$store.dispatch('changeFilters', allFilter);
                 fillFilter = allFilter.filter(item => Boolean(String(Object.values(item))));
                 switch (fillFilter.length) {
                     case 1:
