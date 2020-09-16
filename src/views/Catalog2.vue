@@ -72,6 +72,7 @@
         mounted() {
           this.filterSale = this.$store.getters.getSale;
           this.filterPrice = this.$store.getters.getPrice;
+          this.pageNumber = this.$store.getters.getPage;
         },
         methods: {
             filteredCategory(data) {
@@ -115,11 +116,13 @@
                 if (this.pageNumber < this.countPages) {
                     this.pageNumber++;
                 }
+                this.$store.dispatch('changePage', this.pageNumber)
             },
             decrementPage() {
                 if (this.pageNumber > 1) {
                     this.pageNumber--;
                 }
+                this.$store.dispatch('changePage', this.pageNumber)
             },
             resetPage() {
                 this.pageNumber = 1;

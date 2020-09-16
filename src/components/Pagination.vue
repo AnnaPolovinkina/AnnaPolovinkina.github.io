@@ -31,6 +31,7 @@
         methods: {
             pageClick(page) {
                 this.$emit('changePage', page);
+                this.$store.dispatch('changePage', page)
             },
             incrementPage() {
                 this.$emit('incrementPage');
