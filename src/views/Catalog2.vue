@@ -71,8 +71,7 @@
         },
         mounted() {
           this.filterSale = this.$store.getters.getSale;
-          console.log(this.$store.getters.getSale);
-          // this.filterPrice = this.$store.getters.getPrice;
+          this.filterPrice = this.$store.getters.getPrice;
         },
         methods: {
             filteredCategory(data) {
@@ -127,7 +126,7 @@
                 this.$store.dispatch('changeSale', this.filterSale)
             },
             savePrice() {
-                // this.$store.dispatch('changeSale', this.filterPrice)
+                this.$store.dispatch('changePrice', this.filterPrice)
             }
         },
         computed: {
