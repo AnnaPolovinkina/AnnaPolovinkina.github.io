@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <!--<link rel="stylesheet" type="text/css" href="/src/css/style.css">-->
     <main>
       <Header></Header>
       <div class="wrapper">

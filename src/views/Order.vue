@@ -77,7 +77,7 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .order-item {
         background: #FFFFFF;
         border: 2px solid #ef98aa;
@@ -86,10 +86,13 @@
         flex-direction: row;
         justify-content: space-between;
         overflow: hidden;
+        &+.order-item {
+            margin-top: 30px;
+        }
     }
-    .order-item+.order-item {
+/*    .order-item+.order-item {
         margin-top: 15px;
-    }
+    }*/
     img {
         width: 100px;
         height: auto;
