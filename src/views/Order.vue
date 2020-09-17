@@ -1,10 +1,13 @@
 <template>
-    <div>
+    <div class="order">
         <h1>Оформление заказа</h1>
         <div class="row">
             <div class="col-md-6">
                 <h3>Характеристики заказа</h3>
-                <div class="order-item" v-for="position in thisOrder">
+                <div
+                        class="order-item"
+                        v-for="position in thisOrder"
+                >
                     <div class="order-item_img">
                         <img v-bind:src="position.img_full">
                     </div>
@@ -15,7 +18,6 @@
                         <span>{{position.count}}</span>
                     </div>
                 </div>
-
                 <div class="order_total-sum">
                     <p>Сумма</p>
                     <span>{{orderTotalSum}}</span>
@@ -37,8 +39,6 @@
                 <label for="cash">Наличными</label>
             </div>
         </div>
-
-
         <h2>Контактная информация</h2>
     </div>
 </template>
@@ -76,25 +76,3 @@
         }
     }
 </script>
-
-<style scoped lang="scss">
-    .order-item {
-        background: #FFFFFF;
-        border: 2px solid #ef98aa;
-        border-radius: 5px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        overflow: hidden;
-        &+.order-item {
-            margin-top: 30px;
-        }
-    }
-/*    .order-item+.order-item {
-        margin-top: 15px;
-    }*/
-    img {
-        width: 100px;
-        height: auto;
-    }
-</style>

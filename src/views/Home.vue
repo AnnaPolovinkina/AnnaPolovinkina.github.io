@@ -1,18 +1,15 @@
 <template>
     <div class="page-wrapper">
         <MainSlider></MainSlider>
-        <a href="/catalog">
-            Перейти в каталог
-        </a>
         <router-link v-bind:to="{name: 'catalog2'}">
-            Перейти в каталог 2
+            Перейти в каталог
         </router-link>
-
-        <!--v-bind:category="category.name"-->
-
         <div v-for="category in allCategories">
-            <h1>Название категории: {{category.name}}</h1>
-            <SaleProducts v-bind:resultAll="allResult" v-bind:category="category.name"/>
+            <h3>Название категории: {{category.name}}</h3>
+            <SaleProducts
+                v-bind:resultAll="allResult"
+                v-bind:category="category.name"
+            />
         </div>
 
     </div>

@@ -1,48 +1,56 @@
 <template>
-    <div>
-        <h3>Каталог</h3>
-        <Pagination
-                v-bind:pages="pages"
-                v-on:changePage="changePageNumber"
-                v-bind:pageNumber="pageNumber"
-                v-on:incrementPage="incrementPage"
-                v-on:decrementPage="decrementPage"
-        ></Pagination>
-        <SelectCategory
-                v-on:changeFilter="filteredCategory"
-                v-on:resetPage="resetPage"
-        ></SelectCategory>
-        <br>
-        <select
-                v-model="filterSale"
-                v-on:change="resetPage"
-        >
-            <option value="">Все товары</option>
-            <option value="true">Со скидкой</option>
-            <option value="false">Без скидки</option>
-        </select>
-        <select
-                v-model="filterPrice"
-                v-on:change="savePrice"
-        >
-            <option value="">По умолчанию</option>
-            <option value="increment">По возрастанию</option>
-            <option value="decrement">По убыванию</option>
-        </select>
-        <br>
+    <div class="catalog">
+        <h1>Каталог</h1>
         <div class="row">
-            <ProductCard2
-                    v-for="card in filteredCards"
-                    v-bind:card="card"
-            ></ProductCard2>
+            <div class="col-md-2">
+                <h3>Фильтр</h3>
+                <div class="catalog_filter">
+                    <SelectCategory
+                        v-on:changeFilter="filteredCategory"
+                        v-on:resetPage="resetPage"
+                    ></SelectCategory>
+                    <select
+                        v-model="filterSale"
+                        v-on:change="resetPage"
+                    >
+                        <option value="">Все товары</option>
+                        <option value="true">Со скидкой</option>
+                        <option value="false">Без скидки</option>
+                    </select>
+                    <select
+                        v-model="filterPrice"
+                        v-on:change="savePrice"
+                    >
+                        <option value="">По умолчанию</option>
+                        <option value="increment">По возрастанию</option>
+                        <option value="decrement">По убыванию</option>
+                    </select>
+                </div>
+                <button class="btn btn_dark-green">Сбросить фильтр</button>
+            </div>
+
+            <div class="col-md-10">
+                <div class="row">
+                    <ProductCard2
+                        v-for="card in filteredCards"
+                        v-bind:card="card"
+                    ></ProductCard2>
+                </div>
+            </div>
+            <InfoPopup></InfoPopup>
         </div>
-        <InfoPopup></InfoPopup>
+        <Pagination
+            v-bind:pages="pages"
+            v-on:changePage="changePageNumber"
+            v-bind:pageNumber="pageNumber"
+            v-on:incrementPage="incrementPage"
+            v-on:decrementPage="decrementPage"
+        ></Pagination>
     </div>
 </template>
 
 <script>
     import {mapGetters} from 'vuex'
-    import {mapActions} from 'vuex'
     import ProductCard2 from '@/components/ProductCard2'
     import SelectCategory from '@/components/SelectCategory'
     import InfoPopup from '@/components/InfoPopup'
@@ -196,12 +204,3 @@
     }
 
 </script>
-
-<style scoped>
-    .cart-btn {
-        width: 100px;
-        height: 100px;
-        background: yellow;
-    }
-
-</style>

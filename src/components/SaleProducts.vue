@@ -1,17 +1,30 @@
 <template>
-    <div class="row">
-        <swiper class="swiper" :options="swiperOptions">
+    <div class="slider-sale">
+        <div class="row">
+            <swiper
+                class="swiper"
+                :options="swiperOptions"
+            >
                 <ProductCard2
-                        v-for="card in sales"
-                        v-bind:card="card"
-                        v-bind:slideClass="'swiper-slide'"
+                    v-for="card in sales"
+                    v-bind:card="card"
+                    v-bind:slideClass="'swiper-slide'"
                 >
                 </ProductCard2>
-            <div class="swiper-pagination" slot="pagination"></div>
-            <div class="swiper-button-next" slot="button-prev"></div>
-            <div class="swiper-button-prev" slot="button-next"></div>
-        </swiper>
-
+                <div
+                    class="swiper-pagination"
+                    slot="pagination"
+                ></div>
+                <div
+                    class="swiper-button-next"
+                    slot="button-prev"
+                ></div>
+                <div
+                    class="swiper-button-prev"
+                    slot="button-next"
+                ></div>
+            </swiper>
+        </div>
     </div>
 </template>
 
@@ -68,9 +81,6 @@
                 cardResult = cardResult.filter(item => item.isSale);
                 return cardResult;
             }
-        },
-        mounted() {
-            // this.swiper.slideTo(3, 1000, false);
         }
     }
 </script>

@@ -1,28 +1,25 @@
 <template>
-    <div>
+    <div class="cart">
         <router-link v-bind:to="{name: 'catalog2'}">
             <div class="cart-btn">Обратно в каталог</div>
         </router-link>
-        <h3>Корзина</h3>
-
+        <h1>Корзина</h1>
         <div v-if="!cardData.length">Корзина пуста</div>
         <CartItem
-                v-for="(item, index) in cardData"
-                v-bind:cartItemData="item"
-                v-on:deleteFromCart="deleteCartItemFromCart(index)"
-                v-on:incrementCount="incrementItemCart(index)"
-                v-on:decrementCount="decrementItemCart(index)"
+            v-for="(item, index) in cardData"
+            v-bind:cartItemData="item"
+            v-on:deleteFromCart="deleteCartItemFromCart(index)"
+            v-on:incrementCount="incrementItemCart(index)"
+            v-on:decrementCount="decrementItemCart(index)"
         ></CartItem>
-
         <div class="cart-total" v-if="cardData.length">
-            Итого: <span class="cart-total-sum">{{cartTotalSum}} Р.</span>
+            Итого: <span class="cart_total-sum">{{cartTotalSum}} Р.</span>
         </div>
-
         <router-link
-                v-if="cardData.length"
-                v-bind:to="{name: 'order', params: {cardData: cardData}}"
+            v-if="cardData.length"
+            v-bind:to="{name: 'order', params: {cardData: cardData}}"
         >
-            <button>Оформить заказ</button>
+            <button class="btn btn_red">Оформить заказ</button>
         </router-link>
     </div>
 </template>
@@ -74,11 +71,3 @@
         }
     }
 </script>
-
-<style scoped>
-    .cart-total-sum {
-        font-size: 30px;
-        font-weight: bold;
-        color: blue;
-    }
-</style>

@@ -29,8 +29,9 @@ main {
 .wrapper {
   position: relative;
   overflow: hidden;
+  padding-bottom: 50px;
 }
-//Main slider
+//Main slider banner
 .carousel-banner {
   border: 3px solid $yellow;
   border-radius: $border-radius;
@@ -47,7 +48,20 @@ main {
       width: 50%;
       height: 100%;
       float: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 10px 20px 20px;
     }
+  }
+}
+// Main slider sale
+.slider-sale {
+  .card-product_wrapper {
+    margin-top: 0;
+  }
+  .swiper-pagination-bullet-active {
+    background: $dark-green;
   }
 }
 //Buttons
@@ -58,6 +72,14 @@ main {
   }
   &_orange {
     background-color: $orange;
+    color: #FFFFFF;
+  }
+  &_dark-green {
+    background-color: $dark-green;
+    color: #FFFFFF;
+  }
+  &_red {
+    background-color: $red;
     color: #FFFFFF;
   }
   &:hover {
@@ -73,7 +95,7 @@ main {
     position: relative;
     display: inline-block;
     &:before {
-      content: "₽";
+      content: "P";
       display: inline;
       position: absolute;
       top: 0;
@@ -143,6 +165,7 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-top: 20px;
   &_numbers {
     margin: 0 30px;
     display: flex;
@@ -156,7 +179,7 @@ main {
         cursor: pointer;
         background: #CCCCCC;
       }
-      border-radius: 5px;
+      border-radius: $border-radius;
       &+.pagination_numbers_one {
         margin-left: 10px;
       }
@@ -165,4 +188,60 @@ main {
   .selected {
     background: $green;
   }
+}
+//Catalog
+.catalog {
+  &_filter {
+    margin: 20px 0;
+    select {
+      width: 100%;
+      &+select {
+        margin-top: 20px;
+      }
+    }
+  }
+}
+//Cart item
+.cart-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  border: 3px solid $yellow;
+  background: #FFFFFF;
+  border-radius: $border-radius;
+  padding: 5px 15px;
+  &_caption {
+    font-weight: bold;
+  }
+  img {
+    width: 100px;
+  }
+}
+//Cart
+.cart_total-sum {
+  font-size: 30px;
+  font-weight: bold;
+}
+//Order
+.order-item {
+  background: #FFFFFF;
+  border: 3px solid $yellow;
+  border-radius: $border-radius;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  overflow: hidden;
+  &+.order-item {
+    margin-top: 30px;
+  }
+}
+img {
+  width: 100px;
+  height: auto;
+}
+//Datepicker
+.vdp-datepicker {
+  text-align: center;
 }
