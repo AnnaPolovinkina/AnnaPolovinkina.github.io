@@ -1,17 +1,21 @@
 <template>
-    <div id="pagination">
-        <button v-on:click="decrementPage" class="prev">
+    <div class="pagination">
+        <button
+            v-on:click="decrementPage"
+            class="btn btn_yellow prev">
             Предыдущая
         </button>
-        <div class="page-numbers">
+        <div class="pagination_numbers">
             <div
-                    v-for="page in pages"
-                    v-on:click="pageClick(page)"
-                    class="page-numbers_one"
-                    v-bind:class="{'page_selected': page === pageNumber}"
+                v-for="page in pages"
+                v-on:click="pageClick(page)"
+                class="pagination_numbers_one"
+                v-bind:class="{'selected': page === pageNumber}"
             >{{page}}</div>
         </div>
-        <button v-on:click="incrementPage" class="prev">
+        <button
+            v-on:click="incrementPage"
+            class="btn btn_yellow prev">
             Следующая
         </button>
     </div>
@@ -42,33 +46,3 @@
         }
     }
 </script>
-
-<style scoped>
-    #pagination {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-    }
-    .page-numbers {
-        margin: 0 30px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-    }
-    .page-numbers_one {
-        padding: 5px 10px;
-        background: #FFFFFF;
-        border: 2px solid #ef98aa;
-        border-radius: 5px;
-    }
-    .page-numbers_one:hover, button:hover {
-        cursor: pointer;
-        background: #CCCCCC;
-    }
-    .page-numbers_one+.page-numbers_one {
-        margin-left: 10px;
-    }
-    .page_selected {
-        background: red;
-    }
-</style>

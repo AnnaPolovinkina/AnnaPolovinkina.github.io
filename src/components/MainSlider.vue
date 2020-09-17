@@ -61,3 +61,16 @@
         }
     }
 </script>
+
+<style>
+    #carousel:before {
+        position: absolute;
+        display: block;
+        content: '';
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 397px;
+        background: #0EBB9F;
+    }
+</style>

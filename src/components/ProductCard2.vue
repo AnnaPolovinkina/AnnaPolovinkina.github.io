@@ -1,7 +1,6 @@
 <template>
-    <div
-        id="card card-product"
-        class="col-lg-4 col-md-6 col-xs-12"
+    <div id="card"
+        class="card-product col-lg-4 col-md-6 col-xs-12"
         v-bind:class="slideClass"
     >
         <a class="card-product_wrapper">
