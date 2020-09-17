@@ -1,3 +1,138 @@
-a {
-  color: red !important;
+//Variables
+$border-radius: 5px;
+$border-color: #FFC107;
+$dark-green: #00796B;
+$green: #0EBB9F;
+$yellow: #F5C700;
+$orange: #F69C00;
+$red: #C43829;
+//Main
+html, body {
+  height: 100%;
+}
+main {
+  min-height: 100vh;
+}
+#app {
+/*  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;*/
+  text-align: center;
+  position: relative;
+  /*background: url('/fon1.jpg');*/
+}
+//Header
+#header {
+  background: $dark-green !important;
+}
+//Body
+.wrapper {
+  position: relative;
+}
+//Main slider
+.carousel-banner {
+  border: 3px solid $yellow;
+  border-radius: $border-radius;
+  overflow: hidden;
+  &_slide {
+    height: 300px;
+    &_img {
+      width: 50%;
+      height: 100%;
+      object-fit: contain;
+      float: left;
+    }
+    &_text {
+      width: 50%;
+      height: 100%;
+      float: left;
+    }
+  }
+}
+//Product card
+.card {
+  &_title {
+    font-weight: 700;
+  }
+  &_price {
+    position: relative;
+    display: inline-block;
+    &:before {
+      content: "₽";
+      display: inline;
+      position: absolute;
+      top: 0;
+      left: auto;
+      right: -13px;
+    }
+  }
+}
+.btn {
+  &_yellow {
+    background: $yellow;
+    color: #FFFFFF;
+  }
+  &_orange {
+    background-color: $orange;
+    color: #FFFFFF;
+  }
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  }
+}
+.card-product {
+  &_wrapper {
+    display: block;
+    border: 3px solid $border-color;
+    background: #FFFFFF;
+    border-radius: $border-radius;
+    margin-top: 20px;
+    color: black;
+    &:hover {
+      text-decoration: none;
+      .card-product_picture img {
+        transform: scale(1.3);
+      }
+    }
+  }
+  &_picture {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    img {
+      width: auto;
+      height: 100%;
+      transition: 0.5s ease-in-out all;
+    }
+  }
+  &_description {
+    padding: 15px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
+}
+.sale {
+  position: absolute;
+  width: 150px;
+  height: 100%;
+  top: 0;
+  left: auto;
+  right: 0;
+  span {
+    display: inline-block;
+    width: 200px;
+    height: 45px;
+    background: red;
+    color: #FFF;
+    text-align: center;
+    position: absolute;
+    line-height: 45px;
+    font-size: 16px;
+    font-weight: 700;
+    top: auto;
+    bottom: 8px;
+    right: -66px;
+    transform: rotate(-45deg);
+  }
 }
