@@ -44,7 +44,7 @@
         name: "ProductCard",
         data() {
           return {
-              thisCard: {}
+              thisCard: this.card
           }
         },
         props: {
@@ -54,6 +54,12 @@
             },
             slideClass: {
                 type: String
+            }
+        },
+        watch: {
+            card: function f(newCard) {
+                this.$set(this.card, 'count', 1);
+                this.thisCard = newCard;
             }
         },
         methods: {
@@ -66,8 +72,8 @@
             }
         },
         mounted() {
+            this.$set(this.card, 'count', 1);
             this.thisCard = this.card;
-            this.$set(this.thisCard, 'count', 1);
         }
     }
 </script>

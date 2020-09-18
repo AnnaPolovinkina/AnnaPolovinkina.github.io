@@ -81,6 +81,7 @@
         mounted() {
           this.filterSale = this.$store.getters.getSale;
           this.filterPrice = this.$store.getters.getPrice;
+          // this.pageNumber = 1;
           this.pageNumber = this.$store.getters.getPage;
         },
         methods: {

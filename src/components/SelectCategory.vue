@@ -52,13 +52,14 @@
                     this.$emit('resetPage');
                 } else {
                     var vm  = this;
-                    vm.filter = 'Все категории';
+                    // vm.filter = 'Все категории';
                     vm.allCategory.forEach(function (elem) {
                         if (elem.category === vm.filter) {
                             vm.$emit('changeFilter', elem.name);
                         }
                     });
                 }
+                this.$store.dispatch('changeCategory', this.filter);
             }
         },
         mounted() {
@@ -76,6 +77,7 @@
                     }
                 });
             }
+            this.$store.dispatch('changeCategory', this.filter);
         },
         methods: {
             changeFilter() {

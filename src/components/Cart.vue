@@ -1,8 +1,5 @@
 <template>
     <div class="cart">
-        <router-link v-bind:to="{name: 'catalog2'}">
-            <div class="cart-btn">Обратно в каталог</div>
-        </router-link>
         <h1>Корзина</h1>
         <div v-if="!cardData.length">Корзина пуста</div>
         <CartItem
