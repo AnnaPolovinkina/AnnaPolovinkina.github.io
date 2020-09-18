@@ -56,6 +56,6 @@
 
 <style>
     .cart-item {
-        border: none;
+        border: none !important;
     }
 </style>
