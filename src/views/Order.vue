@@ -30,54 +30,88 @@
 
             <div class="col-md-6">
                 <h3>Способ доставки</h3>
-                <input id="courier" type="radio" name="delivery" v-model="radioDelivery">
+                <input id="courier" type="radio" name="delivery" value="courier" v-model="radioDelivery">
                 <label for="courier">Курьером</label>
-                <input id="pickup" type="radio" name="delivery" v-model="radioDelivery">
+                <input id="pickup" type="radio" name="delivery" value="pickup" v-model="radioDelivery">
                 <label for="pickup">Самовывоз</label>
                 <div class="delivery-content">
-                    <div class="delivery-content_address">
+                    <div
+                            v-if="radioDelivery == 'courier'"
+                            class="delivery-content_address"
+                    >
                         <input type="text" placeholder="Введите адрес доставки">
                     </div>
-                    <div class="delivery-content_maps">
-
+                    <div
+                            v-if="radioDelivery == 'pickup'"
+                            class="delivery-content_maps"
+                    >
+                        <yandex-map
+                                :settings="settings"
+                                :coords="[50.606471, 36.579291]"
+                                zoom="17"
+                                style="width: 600px; height: 400px;"
+                        >
+                            <ymap-marker
+                                    marker-type="placemark"
+                                    markerId="1"
+                                    :coords="[50.606471, 36.579291]"
+                                    hint-content='Бизнес-центр "Энергомаш"'
+                                    :balloon="{header: baloonHeader, body: baloonBody, footer: baloonFooter}"
+                                    :icon="{color: 'red', glyph: 'shopping'}"
+                                    cluster-name="1"
+                            ></ymap-marker>
+                        </yandex-map>
                     </div>
                 </div>
                 <h3>Дата доставки</h3>
                 <Datepicker></Datepicker>
                 <h3>Способ оплаты</h3>
-                <input id="card" type="radio" name="payment" v-model="radioPayment">
+                <input id="card" type="radio" name="payment" value="card" v-model="radioPayment">
                 <label for="card">По карте</label>
-                <input id="cash" type="radio" name="payment" v-model="radioPayment">
+                <input id="cash" type="radio" name="payment" value="cash" v-model="radioPayment">
                 <label for="cash">Наличными</label>
                 <div class="delivery-content">
-                    <div class="delivery-content_number-card">
+                    <div
+                            v-if="radioPayment == 'card'"
+                            class="delivery-content_number-card"
+                    >
                         <input type="text" placeholder="Введите номер карты">
                     </div>
                 </div>
             </div>
         </div>
         <h2>Контактная информация</h2>
-        <button v-on:click="sendOrder">Заказать</button>
+        <button class="btn btn_red" v-on:click="sendOrder">Заказать</button>
     </div>
 </template>
 
 <script>
     import Datepicker from 'vuejs-datepicker';
-    // import Datepicker from "vuejs-datepicker/src/components/Datepicker";
+    import { yandexMap, ymapMarker } from 'vue-yandex-maps'
 
     export default {
         name: "Order",
-        components: {Datepicker},
         data() {
             return {
                 thisOrder: [],
                 orderTotalSum: '',
                 radioDelivery: 'courier',
-                radioPayment: 'card'
+                radioPayment: 'card',
+                settings: {
+                    apiKey: '',
+                    lang: 'ru_RU',
+                    coordorder: 'latlong',
+                    version: '2.1'
+                },
+                baloonHeader: 'ООО "ONE-TOUCH"',
+                baloonBody: 'График работы: пн-пт 10:00 - 19:00',
+                baloonFooter: 'Перерыв: с 14:00 до 15:00',
             }
         },
-        component: {
-            Datepicker: Datepicker
+        components: {
+            Datepicker: Datepicker,
+            yandexMap: yandexMap,
+            ymapMarker: ymapMarker
         },
         mounted() {
             if (this.$route.params.cardData || typeof this.$route.params.cardData !== 'undefined') {
@@ -130,6 +164,6 @@
         height: auto;
     }
     .vdp-datepicker {
-        text-align: center;
+        text-align: center !important;
     }
 </style>
