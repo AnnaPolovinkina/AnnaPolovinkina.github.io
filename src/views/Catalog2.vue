@@ -41,7 +41,6 @@
                     ></ProductCard2>
                 </div>
             </div>
-            <InfoPopup></InfoPopup>
         </div>
         <Pagination
             v-bind:pages="pages"
@@ -57,7 +56,6 @@
     import {mapGetters} from 'vuex'
     import ProductCard2 from '@/components/ProductCard2'
     import SelectCategory from '@/components/SelectCategory'
-    import InfoPopup from '@/components/InfoPopup'
     import Cart from  '@/components/Cart'
     import Pagination from  '@/components/Pagination'
 
@@ -77,7 +75,6 @@
         components: {
             ProductCard2: ProductCard2,
             SelectCategory: SelectCategory,
-            InfoPopup: InfoPopup,
             Cart: Cart,
             Pagination: Pagination,
         },

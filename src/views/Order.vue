@@ -82,12 +82,14 @@
         </div>
         <h2>Контактная информация</h2>
         <button class="btn btn_red" v-on:click="sendOrder">Заказать</button>
+        <InfoPopup></InfoPopup>
     </div>
 </template>
 
 <script>
     import Datepicker from 'vuejs-datepicker';
     import { yandexMap, ymapMarker } from 'vue-yandex-maps'
+    import InfoPopup from '@/components/InfoPopup'
 
     export default {
         name: "Order",
@@ -112,7 +114,8 @@
         components: {
             Datepicker: Datepicker,
             yandexMap: yandexMap,
-            ymapMarker: ymapMarker
+            ymapMarker: ymapMarker,
+            InfoPopup: InfoPopup,
         },
         mounted() {
             if (this.$route.params.cardData || typeof this.$route.params.cardData !== 'undefined') {
@@ -143,6 +146,7 @@
         },
         methods: {
             sendOrder() {
+                this.$bvModal.show('bv-modal-example')
                 this.$store.dispatch('resetOrder')
                 this.$store.dispatch('resetCart')
                 this.thisOrder = this.$store.getters.getOrder;
@@ -166,5 +170,10 @@
     }
     .vdp-datepicker {
         text-align: center !important;
+    }
+    .modal {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
     }
 </style>
