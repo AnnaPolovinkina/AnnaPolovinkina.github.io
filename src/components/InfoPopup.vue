@@ -21,12 +21,13 @@
 
     <b-modal id="bv-modal-example" hide-footer>
         <template v-slot:modal-title>
-            Using <code>$bvModal</code> Methods
+            <!--Using <code>$bvModal</code> Methods-->
         </template>
         <div class="d-block text-center">
-            <h3>Hello From This Modal!</h3>
+            <h2>Спасибо!</h2>
+            <h3>Ваш заказ принят!</h3>
         </div>
-        <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Close Me</b-button>
+        <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Закрыть</b-button>
     </b-modal>
 </template>
 

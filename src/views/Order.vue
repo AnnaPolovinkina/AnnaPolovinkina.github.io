@@ -2,8 +2,13 @@
     <div class="order">
         <h1>Оформление заказа</h1>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <h3>Характеристики заказа</h3>
+                <div class="order_caption">
+                    <div class="">Товар</div>
+                    <div class="">Наименование</div>
+                    <div class="">Количество</div>
+                </div>
                 <div
                         class="order-item"
                         v-for="position in thisOrder"
@@ -11,16 +16,16 @@
                     <div class="order-item_img">
                         <img v-bind:src="position.img_full">
                     </div>
-                    <div class="order-item_content">
+                    <!--<div class="order-item_content">-->
                         <div>
-                            <p>Наименование товара</p>
+                            <!--<p>Наименование товара</p>-->
                             <span>{{position.title}}</span>
                         </div>
                         <div>
-                            <p>Количество товаров</p>
+                            <!--<p>Количество товаров</p>-->
                             <span>{{position.count}}</span>
                         </div>
-                    </div>
+                    <!--</div>-->
                 </div>
                 <div class="order_total-sum">
                     <p>Сумма</p>
@@ -28,7 +33,14 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-8">
+                <h2>Контактная информация</h2>
+                <div class="order_contact-info">
+                    <input type="text" placeholder="Имя"/>
+                    <input type="text" placeholder="Номер телефона"/>
+                    <input type="text" placeholder="Электронная почта"/>
+                </div>
+
                 <h3>Способ доставки</h3>
                 <input id="courier" type="radio" name="delivery" value="courier" v-model="radioDelivery">
                 <label for="courier">Курьером</label>
@@ -80,7 +92,6 @@
                 </div>
             </div>
         </div>
-        <h2>Контактная информация</h2>
         <button class="btn btn_red" v-on:click="sendOrder">Заказать</button>
         <InfoPopup></InfoPopup>
     </div>
@@ -146,7 +157,9 @@
         },
         methods: {
             sendOrder() {
-                this.$bvModal.show('bv-modal-example')
+                if (this.thisOrder.length) {
+                    this.$bvModal.show('bv-modal-example')
+                }
                 this.$store.dispatch('resetOrder')
                 this.$store.dispatch('resetCart')
                 this.thisOrder = this.$store.getters.getOrder;
@@ -159,10 +172,11 @@
 </script>
 
 <style>
-    .order-item_content {
+    .order_caption, .order-item {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        border: none;
     }
     .order-item_img img {
         width: 75px;
@@ -175,5 +189,14 @@
         display: flex !important;
         flex-direction: column;
         justify-content: center;
+    }
+    .order_contact-info {
+        text-align: center;
+    }
+    .order_contact-info input {
+        display: block;
+    }
+    .order_contact-info input+input {
+        margin-top: 20px;
     }
 </style>

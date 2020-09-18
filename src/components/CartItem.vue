@@ -53,3 +53,9 @@
 
     }
 </script>
+
+<style>
+    .cart-item {
+        border: none;
+    }
+</style>
