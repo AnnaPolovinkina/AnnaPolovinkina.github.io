@@ -1,9 +1,9 @@
 <template>
     <div class="page-wrapper">
         <MainSlider></MainSlider>
-        <router-link v-bind:to="{name: 'catalog2'}">
+ <!--       <router-link v-bind:to="{name: 'catalog2'}">
             Перейти в каталог
-        </router-link>
+        </router-link>-->
         <div v-for="category in allCategories">
             <h3>Название категории: {{category.name}}</h3>
             <SaleProducts

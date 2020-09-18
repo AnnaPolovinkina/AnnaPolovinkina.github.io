@@ -91,10 +91,3 @@
         },
     }
 </script>
-
-<style scoped>
-    select {
-        width: 300px;
-    }
-
-</style>

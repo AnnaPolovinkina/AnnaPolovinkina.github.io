@@ -1,8 +1,8 @@
 <template>
-    <div id="product-page">
+    <div class="product-page">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="product-page_title">{{product.title}}</h1>
+                <h1>{{product.title}}</h1>
             </div>
         </div>
         <div class="row">
@@ -17,11 +17,16 @@
                         {{tag}}
                     </span>
                 </div>
-                <p class="product-page_description">{{product.description}}</p>
-                <p class="product-page_category">Категория: {{product.category}}</p>
-                <p class="product-page_price">Цена: {{product.price}}</p>
-                <p class="product-page_sale">Скидка: {{product.isSale}}</p>
-                <p class="product-page_date">Дата обновления: {{product.created}}</p>
+
+                <div class="product-page_content">
+                    <p class="product-page_description">{{product.description}}</p>
+                    <p class="product-page_category">Категория: {{product.category}}</p>
+                    <p class="product-page_price">Цена: {{product.price}} Р</p>
+                    <p class="product-page_sale">Скидка: {{product.isSale}}</p>
+                    <p class="product-page_date">Дата добавления: {{product.created}}</p>
+                    <button class="btn btn_orange">В корзину</button>
+                </div>
+
             </div>
         </div>
     </div>
@@ -47,21 +52,31 @@
     }
 </script>
 
-<style scoped>
-    .product-page_img img {
-        width: 100%;
-        height: auto;
+<style lang="scss">
+    .product-page {
+        &_img img {
+            width: 100%;
+            height: auto;
+        }
+        &_tags {
+            text-align: left;
+            margin-top: 20px;
+            &-one {
+                padding: 10px;
+                background: #00796B;
+                color: #FFFFFF;
+                border-radius: 5px;
+                font-weight: bold;
+                &+.product-page_tags-one {
+                    margin-left: 10px;
+                }
+            }
+        }
     }
-    .product-page_tags {
+    .product-page_content {
         text-align: left;
+        margin-top: 20px;
     }
-    .product-page_tags-one {
-        padding: 10px;
-        background: #ccc;
-        border-radius: 5px;
-        font-weight: bold;
-    }
-    .product-page_tags-one+.product-page_tags-one {
-        margin-left: 10px;
+    .product-page {
     }
 </style>

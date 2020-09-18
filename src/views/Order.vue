@@ -11,11 +11,15 @@
                     <div class="order-item_img">
                         <img v-bind:src="position.img_full">
                     </div>
-                    <div class="order-img_content">
-                        <p>Наименование товара</p>
-                        <span>{{position.title}}</span>
-                        <p>Количество товаров</p>
-                        <span>{{position.count}}</span>
+                    <div class="order-item_content">
+                        <div>
+                            <p>Наименование товара</p>
+                            <span>{{position.title}}</span>
+                        </div>
+                        <div>
+                            <p>Количество товаров</p>
+                            <span>{{position.count}}</span>
+                        </div>
                     </div>
                 </div>
                 <div class="order_total-sum">
@@ -26,17 +30,30 @@
 
             <div class="col-md-6">
                 <h3>Способ доставки</h3>
-                <input id="courier" type="radio" name="delivery">
+                <input id="courier" type="radio" name="delivery" v-model="radioDelivery">
                 <label for="courier">Курьером</label>
-                <input id="pickup" type="radio" name="delivery">
+                <input id="pickup" type="radio" name="delivery" v-model="radioDelivery">
                 <label for="pickup">Самовывоз</label>
+                <div class="delivery-content">
+                    <div class="delivery-content_address">
+                        <input type="text" placeholder="Введите адрес доставки">
+                    </div>
+                    <div class="delivery-content_maps">
+
+                    </div>
+                </div>
                 <h3>Дата доставки</h3>
                 <Datepicker></Datepicker>
                 <h3>Способ оплаты</h3>
-                <input id="card" type="radio" name="payment">
+                <input id="card" type="radio" name="payment" v-model="radioPayment">
                 <label for="card">По карте</label>
-                <input id="cash" type="radio" name="payment">
+                <input id="cash" type="radio" name="payment" v-model="radioPayment">
                 <label for="cash">Наличными</label>
+                <div class="delivery-content">
+                    <div class="delivery-content_number-card">
+                        <input type="text" placeholder="Введите номер карты">
+                    </div>
+                </div>
             </div>
         </div>
         <h2>Контактная информация</h2>
@@ -53,7 +70,9 @@
         data() {
             return {
                 thisOrder: [],
-                orderTotalSum: ''
+                orderTotalSum: '',
+                radioDelivery: 'courier',
+                radioPayment: 'card'
             }
         },
         component: {
@@ -76,3 +95,18 @@
         }
     }
 </script>
+
+<style>
+    .order-item_content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .order-item_img img {
+        width: 75px;
+        height: auto;
+    }
+    .vdp-datepicker {
+        text-align: center;
+    }
+</style>
