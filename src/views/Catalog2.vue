@@ -138,6 +138,7 @@
             },
             resetPage() {
                 this.pageNumber = 1;
+                this.$store.dispatch('changePage', this.pageNumber)
                 this.$store.dispatch('changeSale', this.filterSale)
             },
             savePrice() {
