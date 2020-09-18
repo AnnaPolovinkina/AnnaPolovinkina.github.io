@@ -26,7 +26,10 @@
                         <option value="decrement">По убыванию</option>
                     </select>
                 </div>
-                <button class="btn btn_dark-green">Сбросить фильтр</button>
+                <button
+                        class="btn btn_dark-green"
+                        v-on:click="resetFilters"
+                >Сбросить фильтр</button>
             </div>
 
             <div class="col-md-10">
@@ -138,6 +141,12 @@
             },
             savePrice() {
                 this.$store.dispatch('changePrice', this.filterPrice)
+            },
+            resetFilters() {
+                // this.filteredCategory('Все категории');
+                // this.filteredCards();
+                // this.filterSale = '';
+                // this.filterPrice = '';
             }
         },
         computed: {
@@ -152,6 +161,7 @@
                     allFilter = [],
                     fillFilter;
                 allFilter.push({category: filterCategory},{isSale: filterSale},{price: filterPrice});
+
                 // this.$store.dispatch('changeFilters', allFilter);
                 fillFilter = allFilter.filter(item => Boolean(String(Object.values(item))));
                 switch (fillFilter.length) {

@@ -57,6 +57,7 @@
             </div>
         </div>
         <h2>Контактная информация</h2>
+        <button v-on:click="sendOrder">Заказать</button>
     </div>
 </template>
 
@@ -89,10 +90,32 @@
             allOrder.forEach(function (elem, ind) {
                 totalSum = totalSum + elem.price;
             });
-
             this.orderTotalSum = totalSum;
-
+        },
+        watch: {
+            '$route' (to, from) {
+                if (to.params.cardData || typeof to.params.cardData !== 'undefined') {
+                    this.$store.dispatch('changeOrder', to.params.cardData);
+                }
+                this.thisOrder = this.$store.getters.getOrder;
+                var allOrder = this.thisOrder,
+                    totalSum = 0;
+                allOrder.forEach(function (elem, ind) {
+                    totalSum = totalSum + elem.price;
+                });
+                this.orderTotalSum = totalSum;
+            }
+        },
+        methods: {
+            sendOrder() {
+                this.$store.dispatch('resetOrder')
+                this.$store.dispatch('resetCart')
+                this.thisOrder = this.$store.getters.getOrder;
+                this.orderTotalSum = 0;
+            }
         }
+
+
     }
 </script>
 

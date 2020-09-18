@@ -11,7 +11,10 @@ export default {
         },
         decrementCartItem({commit}, index) {
             commit('decrementItem', index);
-        }
+        },
+        resetCart({commit}) {
+            commit('resetCart');
+        },
     },
     mutations: {
         setCart(state, product) {
@@ -43,6 +46,9 @@ export default {
                 state.cart[index].count--
             }
         },
+        resetCart(state) {
+            state.cart = []
+        }
     },
     state: {
         cart: []

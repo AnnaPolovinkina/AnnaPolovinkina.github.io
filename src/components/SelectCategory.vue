@@ -49,7 +49,7 @@
                 if (goCatalog || typeof goCatalog !== "undefined") {
                     this.filter = goCatalog;
                     this.$emit('changeFilter', goCatalog);
-                    this.$route.params.fromSliderToCatalog = '';
+                    this.$emit('resetPage');
                 } else {
                     var vm  = this;
                     vm.filter = 'Все категории';
@@ -66,7 +66,7 @@
             if (goCatalog || typeof goCatalog !== "undefined") {
                 this.filter = goCatalog;
                 this.$emit('changeFilter', goCatalog);
-                this.$route.params.fromSliderToCatalog = '';
+                this.$emit('resetPage');
             } else {
                 var vm  = this;
                 vm.filter = this.$store.getters.getCategory;
