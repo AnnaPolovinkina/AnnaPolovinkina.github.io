@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <h3>Дата доставки</h3>
-                <Datepicker></Datepicker>
+                <Datepicker :value="date"></Datepicker>
                 <h3>Способ оплаты</h3>
                 <input id="card" type="radio" name="payment" value="card" v-model="radioPayment">
                 <label for="card">По карте</label>
@@ -106,6 +106,7 @@
                 baloonHeader: 'ООО "ONE-TOUCH"',
                 baloonBody: 'График работы: пн-пт 10:00 - 19:00',
                 baloonFooter: 'Перерыв: с 14:00 до 15:00',
+                date: new Date()
             }
         },
         components: {

@@ -8,6 +8,7 @@
                     <SelectCategory
                         v-on:changeFilter="filteredCategory"
                         v-on:resetPage="resetPage"
+
                     ></SelectCategory>
                     <select
                         v-model="filterSale"
@@ -143,10 +144,11 @@
                 this.$store.dispatch('changePrice', this.filterPrice)
             },
             resetFilters() {
-                // this.filteredCategory('Все категории');
-                // this.filteredCards();
-                // this.filterSale = '';
-                // this.filterPrice = '';
+                this.filteredCategory('');
+                this.filterSale = '';
+                this.filterPrice = '';
+                this.$children[0].filter = 'Все категории';
+                this.$children[0].changeFilter();
             }
         },
         computed: {

@@ -1,0 +1,191 @@
+html, body {
+  height: 100%; }
+
+main {
+  min-height: 100vh; }
+
+#app {
+  /*  font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;*/
+  text-align: center;
+  position: relative;
+  /*background: url('/fon1.jpg');*/ }
+
+#header {
+  background: #00796B !important; }
+
+.wrapper {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 50px; }
+
+.carousel-banner {
+  border: 3px solid #F5C700;
+  border-radius: 5px;
+  overflow: hidden; }
+  .carousel-banner_slide {
+    height: 300px; }
+    .carousel-banner_slide_img {
+      width: 50%;
+      height: 100%;
+      object-fit: contain;
+      float: left; }
+    .carousel-banner_slide_text {
+      width: 50%;
+      height: 100%;
+      float: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 10px 20px 20px; }
+
+.slider-sale .card-product_wrapper {
+  margin-top: 0; }
+.slider-sale .swiper-pagination-bullet-active {
+  background: #00796B; }
+
+.btn_yellow {
+  background: #F5C700;
+  color: #FFFFFF; }
+.btn_orange {
+  background-color: #F69C00;
+  color: #FFFFFF; }
+.btn_dark-green {
+  background-color: #00796B;
+  color: #FFFFFF; }
+.btn_red {
+  background-color: #dc3545;
+  color: #FFFFFF; }
+.btn:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
+
+.card_title {
+  font-weight: 700; }
+.card_price {
+  position: relative;
+  display: inline-block; }
+  .card_price:before {
+    content: "P";
+    display: inline;
+    position: absolute;
+    top: 0;
+    left: auto;
+    right: -13px; }
+
+.card-product_wrapper {
+  display: block;
+  border: 3px solid #FFC107;
+  background: #FFFFFF;
+  border-radius: 5px;
+  margin-top: 20px;
+  color: black; }
+  .card-product_wrapper:hover {
+    text-decoration: none; }
+    .card-product_wrapper:hover .card-product_picture img {
+      transform: scale(1.3); }
+.card-product_picture {
+  height: 200px;
+  overflow: hidden;
+  position: relative; }
+  .card-product_picture img {
+    width: auto;
+    height: 100%;
+    transition: 0.5s ease-in-out all; }
+.card-product_description {
+  padding: 15px;
+  text-align: left;
+  position: relative;
+  overflow: hidden; }
+
+.sale {
+  position: absolute;
+  width: 150px;
+  height: 100%;
+  top: 0;
+  left: auto;
+  right: 0; }
+  .sale span {
+    display: inline-block;
+    width: 200px;
+    height: 45px;
+    background: red;
+    color: #FFF;
+    text-align: center;
+    position: absolute;
+    line-height: 45px;
+    font-size: 16px;
+    font-weight: 700;
+    top: auto;
+    bottom: 8px;
+    right: -66px;
+    transform: rotate(-45deg); }
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px; }
+  .pagination_numbers {
+    margin: 0 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center; }
+    .pagination_numbers_one {
+      padding: 5px 10px;
+      background: #FFFFFF;
+      border: 3px solid #00796B;
+      border-radius: 5px; }
+      .pagination_numbers_one:hover {
+        cursor: pointer;
+        background: #CCCCCC; }
+      .pagination_numbers_one + .pagination_numbers_one {
+        margin-left: 10px; }
+  .pagination .selected {
+    background: #0EBB9F; }
+
+.catalog_filter {
+  margin: 20px 0; }
+  .catalog_filter select {
+    width: 100%; }
+    .catalog_filter select + select {
+      margin-top: 20px; }
+
+.cart-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  border: 3px solid #F5C700;
+  background: #FFFFFF;
+  border-radius: 5px;
+  padding: 5px 15px; }
+  .cart-item_caption {
+    font-weight: bold; }
+  .cart-item img {
+    width: 100px; }
+
+.cart_total-sum {
+  font-size: 30px;
+  font-weight: bold; }
+
+.order-item {
+  background: #FFFFFF;
+  border: 3px solid #F5C700;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  overflow: hidden; }
+  .order-item + .order-item {
+    margin-top: 30px; }
+
+img {
+  width: 100px;
+  height: auto; }
+
+.vdp-datepicker {
+  text-align: center; }
+
+/*# sourceMappingURL=style.css.map */
