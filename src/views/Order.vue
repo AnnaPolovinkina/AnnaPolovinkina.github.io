@@ -121,7 +121,7 @@
                     </div>
                 </div>
                 <div>
-                    Сумма: <span class="order_total-sum">{{orderTotalSum}}</span>
+                    Сумма: <span class="total-sum">{{orderTotalSum}}</span>
                 </div>
             </div>
         </div>
@@ -146,10 +146,17 @@
     });
     extend('name', value => {
         if (value.length < 4) {
+            if (!(/^[а-яa-z]+$/i.test(value))) {
+                return 'Имя должно состоять только из букв';
+            }
             return 'Имя должно быть не менее 3 символов';
         } else {
+            if (!(/^[а-яa-z]+$/i.test(value))) {
+                return 'Имя должно состоять только из букв';
+            }
             return true;
         }
+
     });
     extend('phone', value => {
         if (value.length != 14) {
@@ -285,91 +292,3 @@
         }
     }
 </script>
-
-<style>
-    .order_caption {
-        padding: 10px;
-        /*background: #00796B !important;*/
-        border-radius: 5px;
-        position: relative;
-    }
-    .order_caption:before {
-        /*content: '';*/
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 5%;
-        width: 90%;
-        height: 100%;
-        background: #00796B;
-        border-radius: 5px;
-    }
-    .order_caption, .order-item {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        border: none;
-        background: none;
-    }
-    .order-item_img img {
-        width: 75px;
-        height: auto;
-    }
-    .vdp-datepicker {
-        text-align: center !important;
-    }
-    .modal {
-        display: flex !important;
-        flex-direction: column;
-        justify-content: center;
-    }
-    .order_contact-info {
-        text-align: center;
-    }
-    .order_contact-info input {
-        display: block;
-    }
-    .order_contact-info input+input {
-        margin-top: 20px;
-    }
-    input[type="text"] {
-        width: 100% !important;
-    }
-    .phone {
-        position: relative;
-        display: table;
-        border-collapse: separate;
-
-    }
-    input, .phone input {
-        border: 1px solid #000000;
-        border-radius: 5px;
-    }
-    .input-group-addon:first-child {
-        border-right: 0;
-    }
-    .input-group-addon {
-        padding: 6px 12px;
-        font-size: 14px;
-        font-weight: 700;
-        line-height: 1;
-        color: #ffffff;
-        text-align: center;
-        background-color: #00796B;
-        /*border: 1px solid #000000;*/
-        border-radius: 5px;
-        width: 1%;
-        white-space: nowrap;
-        vertical-align: middle;
-        display: table-cell;
-    }
-    .order_total-sum {
-        font-size: 30px;
-        font-weight: bold;
-    }
-    .error {
-        /*font-weight: 700;*/
-        color: red;
-    }
-</style>

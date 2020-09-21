@@ -36,7 +36,3 @@
         name: "InfoPopup"
     }
 </script>
-
-<style scoped>
-
-</style>

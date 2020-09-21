@@ -4,7 +4,10 @@
             <div class="header_wrapper">
                 <div class="row justify-content">
                     <div class="col-xl-2 logo">
-                        <router-link v-bind:to="{name: 'home'}">
+                        <router-link
+                            v-bind:to="{name: 'home'}"
+                            class="ico-main"
+                        >
                             <img src="@/assets/logo1.jpg" alt="Логотип">
                         </router-link>
                     </div>
@@ -62,50 +65,3 @@
         }
     }
 </script>
-
-<style scoped>
-    #header {
-        background: #FFFFFF;
-    }
-    .header_wrapper {
-        height: 70px;
-        overflow: hidden;
-    }
-    .justify-content {
-        justify-content: space-between;
-        align-items: center;
-    }
-    img {
-        width: auto;
-        height: 70px;
-    }
-    .cart {
-        position: relative;
-        display: inline-block;
-    }
-    .cart img {
-        width: 45px;
-        height: auto;
-    }
-    .count-products {
-        position: absolute;
-        top: -4px;
-        left: auto;
-        right: -18px;
-        width: 27px;
-        height: 27px;
-        background: gray;
-        color: #FFFFFF;
-        font-size: 14px;
-        line-height: 27px;
-        border-radius: 50%;
-    }
-    .header_link {
-        color: #FFFFFF;
-        font-size: 20px;
-        font-weight: 700;
-    }
-    .header_link+.header_link {
-        margin-left: 20px;
-    }
-</style>

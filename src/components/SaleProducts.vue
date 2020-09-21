@@ -84,29 +84,3 @@
         }
     }
 </script>
-
-
-<style scoped>
-/*    .swiper-button-next:after, .swiper-button-prev:after {
-        display: none;
-    }
-    .swiper-button-prev, .swiper-button-next {
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        background: red;
-        color: #ffffff;
-        font-size: 30px;
-        line-height: 30px;
-        text-align: center;
-        font-weight: 700;
-    }*/
-    .swiper-button-prev {
-        left: 0;
-        color: #00796B;
-    }
-    .swiper-button-next {
-        right: 0;
-        color: #00796B;
-    }
-</style>

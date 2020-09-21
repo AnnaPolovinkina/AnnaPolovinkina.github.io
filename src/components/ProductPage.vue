@@ -66,30 +66,3 @@
         }
     }
 </script>
-
-<style lang="scss">
-    .product-page {
-        &_img img {
-            width: 100%;
-            height: auto;
-        }
-        &_tags {
-            text-align: left;
-            margin-top: 20px;
-            &-one {
-                padding: 10px;
-                background: #00796B;
-                color: #FFFFFF;
-                border-radius: 5px;
-                font-weight: bold;
-                &+.product-page_tags-one {
-                    margin-left: 10px;
-                }
-            }
-        }
-    }
-    .product-page_content {
-        text-align: left;
-        margin-top: 20px;
-    }
-</style>

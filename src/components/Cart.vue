@@ -10,7 +10,7 @@
             v-on:decrementCount="decrementItemCart(index)"
         ></CartItem>
         <div class="cart-total" v-if="cardData.length">
-            Итого: <span class="cart_total-sum">{{cartTotalSum}} Р.</span>
+            Итого: <span class="total-sum">{{cartTotalSum}} Р.</span>
         </div>
         <router-link
             v-if="cardData.length"
