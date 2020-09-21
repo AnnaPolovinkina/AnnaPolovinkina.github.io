@@ -29,7 +29,10 @@
                         </router-link>
                     </div>
                     <div class="col-xl-2 cart">
-                        <router-link v-bind:to="{name: 'cart', params: {cardData: cart}}">
+                        <router-link
+                                v-bind:to="{name: 'cart', params: {cardData: cart}}"
+                                class="icon-cart"
+                        >
                         <div class="cart">
                             <img src="@/assets/cart1.png" alt="Корзина">
                             <div class="count-products">

@@ -78,4 +78,7 @@
         height: 397px;
         background: #0EBB9F;
     }
+    img.carousel-banner_slide_img {
+       display: block !important;
+    }
 </style>

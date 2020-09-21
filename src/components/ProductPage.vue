@@ -24,7 +24,7 @@
                     <p class="product-page_price">Цена: {{product.price}} Р</p>
                     <p class="product-page_sale">Скидка: {{product.isSale}}</p>
                     <p class="product-page_date">Дата добавления: {{product.created}}</p>
-                    <button class="btn btn_orange">В корзину</button>
+                    <button class="btn btn_orange" v-on:click="addCardToCart">В корзину</button>
                 </div>
 
             </div>
@@ -34,8 +34,15 @@
 
 <script>
     import {mapGetters} from 'vuex'
+    import {mapActions} from 'vuex'
+
     export default {
         name: "ProductPage",
+        data() {
+            return {
+                productCard: {}
+            }
+        },
         computed: {
             ...mapGetters(['allProducts']),
             product() {
@@ -46,7 +53,15 @@
                         result = elem;
                     }
                 });
+                this.productCard = result;
+                this.$set(this.productCard, 'count', 1);
                 return result;
+            }
+        },
+        methods: {
+            ...mapActions(['addToCart']),
+            addCardToCart() {
+                this.addToCart(this.productCard);
             }
         }
     }
@@ -76,7 +91,5 @@
     .product-page_content {
         text-align: left;
         margin-top: 20px;
-    }
-    .product-page {
     }
 </style>

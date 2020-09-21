@@ -27,3 +27,27 @@
         }
     }
 </script>
+
+<style>
+  .router-link-exact-active {
+    position: relative;
+  }
+  .router-link-exact-active:not(.icon-cart):before {
+    /*text-decoration: underline;*/
+    content: "";
+    position: absolute;
+    display: block;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #ffffff;
+  }
+  .header_link:hover {
+    text-decoration: none;
+    /*#F5C700*/
+    /*color: #000000;*/
+    /*opacity: 0.1;*/
+    outline: 2px solid #ffffff;
+  }
+</style>

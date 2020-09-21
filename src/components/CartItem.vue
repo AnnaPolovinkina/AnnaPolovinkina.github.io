@@ -57,5 +57,6 @@
 <style>
     .cart-item {
         border: none !important;
+        background: none !important;
     }
 </style>
