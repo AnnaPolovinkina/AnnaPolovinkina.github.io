@@ -45,7 +45,7 @@
         },
         computed: {
             ...mapGetters(['allProducts']),
-            product() {
+            product() { //Получение данных о товаре
                 var result = {},
                     vm = this;
                 this.allProducts.map(function (elem) {
@@ -60,7 +60,7 @@
         },
         methods: {
             ...mapActions(['addToCart']),
-            addCardToCart() {
+            addCardToCart() { //Добавление товара в корзину
                 this.addToCart(this.productCard);
             }
         }

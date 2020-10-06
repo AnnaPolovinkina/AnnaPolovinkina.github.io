@@ -33,14 +33,14 @@
             }
         },
         methods: {
-            pageClick(page) {
+            pageClick(page) { //Выбор номера страницы
                 this.$emit('changePage', page);
                 this.$store.dispatch('changePage', page)
             },
-            incrementPage() {
+            incrementPage() { //Увеличение номера страницы
                 this.$emit('incrementPage');
             },
-            decrementPage() {
+            decrementPage() { //Уменьшение номера страницы
                 this.$emit('decrementPage');
             }
         }

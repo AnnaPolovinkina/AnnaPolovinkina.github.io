@@ -40,13 +40,13 @@
             }
         },
         methods: {
-            deleteCartItem() {
+            deleteCartItem() { //Удаление товара из корзины
                 this.$emit('deleteFromCart')
             },
-            increment() {
+            increment() { //Увеличение количества одного товара
                 this.$emit('incrementCount');
             },
-            decrement() {
+            decrement() { //Уменьшение количества одного товара
                 this.$emit('decrementCount');
             }
         }

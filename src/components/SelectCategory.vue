@@ -25,7 +25,7 @@
         },
         computed: {
             ...mapGetters(['allProducts']),
-            filteredOptions() {
+            filteredOptions() { //Формирование списка категорий из JSON
                 var allResult = this.$store.getters.allProducts,
                     categoryResult = [],
                     jsonCategory;
@@ -44,7 +44,7 @@
             }
         },
         watch: {
-            '$route' (to, from) {
+            '$route' (to, from) { //Отслеживание выбранной категории
                 var goCatalog = to.params.fromSliderToCatalog;
                 if (goCatalog || typeof goCatalog !== "undefined") {
                     this.filter = goCatalog;
@@ -62,7 +62,7 @@
                 this.$store.dispatch('changeCategory', this.filter);
             }
         },
-        mounted() {
+        mounted() { //Получение выбранной категории
             var goCatalog = this.$route.params.fromSliderToCatalog;
             if (goCatalog || typeof goCatalog !== "undefined") {
                 this.filter = goCatalog;
@@ -80,7 +80,7 @@
             this.$store.dispatch('changeCategory', this.filter);
         },
         methods: {
-            changeFilter() {
+            changeFilter() { //Изменение выбранной категории
                 var vm  = this;
                 vm.allCategory.forEach(function (elem) {
                     if (elem.category === vm.filter) {

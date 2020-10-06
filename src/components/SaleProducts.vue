@@ -11,10 +11,10 @@
                     v-bind:slideClass="'swiper-slide'"
                 >
                 </ProductCard2>
-                <div
+<!--                <div
                     class="swiper-pagination"
                     slot="pagination"
-                ></div>
+                ></div>-->
                 <div
                     class="swiper-button-next"
                     slot="button-prev"
@@ -24,6 +24,13 @@
                     slot="button-next"
                 ></div>
             </swiper>
+
+            <!--<div class="swiper-options">-->
+                <div id="pag"
+                        class="swiper-pagination"
+                        slot="pagination"
+                ></div>
+            <!--</div>-->
         </div>
     </div>
 </template>
@@ -39,7 +46,8 @@
           return {
               swiperOptions: {
                   pagination: {
-                      el: '.swiper-pagination'
+                      el: document.getElementById('pag'),
+                      type: 'bullets'
                   },
                   navigation: {
                       nextEl: '.swiper-button-next',
@@ -66,10 +74,10 @@
             swiper: directive
         },
         computed: {
-            swiper() {
+            swiper() { //Инициализация слайдера
                 return this.$refs.mySwiper.$swiper
             },
-            sales() {
+            sales() { //Фильтрация товаров по категориям и наличию скидки
                 var all = this.resultAll,
                     cardCategory = this.category,
                     cardResult = [];

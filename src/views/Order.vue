@@ -87,7 +87,7 @@
                             v-if="radioPayment == 'card'"
                             class="delivery-content_number-card"
                     >
-<!--                        <input type="text" placeholder="Введите номер карты">-->
+                        <!--                        <input type="text" placeholder="Введите номер карты">-->
                         <input
                                 type="text"
                                 name="cardNumber"
@@ -120,11 +120,14 @@
                         <span>{{position.count}}</span>
                     </div>
                 </div>
-                <div>
-                    Сумма: <span class="total-sum">{{orderTotalSum}}</span>
-                </div>
             </div>
         </div>
+            <div>
+                Итоговое количество: <span class="total-sum">{{orderTotalCount}}</span>
+            </div>
+            <div>
+                Итоговая сумма: <span class="total-sum">{{orderTotalSum}}</span>
+            </div>
         <button type="submit" class="btn btn_red">Заказать</button>
         </form>
         </ValidationObserver>
@@ -176,6 +179,7 @@
             return {
                 thisOrder: [],
                 orderTotalSum: '',
+                orderTotalCount: 0,
                 radioDelivery: 'courier',
                 radioPayment: 'card',
                 settings: {
@@ -213,35 +217,41 @@
             ValidationObserver: ValidationObserver,
             ValidationProvider: ValidationProvider
         },
-        mounted() {
+        mounted() { //Получение данных о заказе (товары, их количество и сумма)
             if (this.$route.params.cardData || typeof this.$route.params.cardData !== 'undefined') {
                 this.$store.dispatch('changeOrder', this.$route.params.cardData);
             }
             this.thisOrder = this.$store.getters.getOrder;
 
             var allOrder = this.thisOrder,
-                totalSum = 0;
+                totalSum = 0,
+                totalCount = 0;
             allOrder.forEach(function (elem, ind) {
                 totalSum = totalSum + elem.price;
+                totalCount = totalCount + elem.count;
             });
             this.orderTotalSum = Math.floor(totalSum * 100) / 100;
+            this.orderTotalCount = totalCount;
         },
-        watch: {
+        watch: { //Отслеживание данных о заказе (товары, их количество и сумма)
             '$route' (to, from) {
                 if (to.params.cardData || typeof to.params.cardData !== 'undefined') {
                     this.$store.dispatch('changeOrder', to.params.cardData);
                 }
                 this.thisOrder = this.$store.getters.getOrder;
                 var allOrder = this.thisOrder,
-                    totalSum = 0;
+                    totalSum = 0,
+                    totalCount = 0;
                 allOrder.forEach(function (elem, ind) {
                     totalSum = totalSum + elem.price;
+                    totalCount = totalCount + elem.count;
                 });
                 this.orderTotalSum = Math.floor(totalSum * 100) / 100;
+                this.orderTotalCount = totalCount;
             }
         },
         methods: {
-            sendOrder() {
+            sendOrder() { //Отправка заказа (обнуление данных, появление всплывающего окна)
                 if (this.thisOrder.length) {
                     this.$bvModal.show('bv-modal-example')
                 }
@@ -249,8 +259,9 @@
                 this.$store.dispatch('resetCart')
                 this.thisOrder = this.$store.getters.getOrder;
                 this.orderTotalSum = 0;
+                this.orderTotalCount = 0;
             },
-            onSubmit () {
+            onSubmit () { //Отправка заказа (валидация, очистка полей формы)
                 this.$refs.form.validate().then(success => {
                     if (!success) {
                         return;
@@ -261,12 +272,10 @@
                         this.$refs.form.reset();
                     });
                 });
-
-
             }
         },
         directives: {
-            phone: {
+            phone: { //Маска для номера телефона
                 bind: function (el) {
                     el.oninput = function(e) {
                         if (!e.isTrusted) {
@@ -278,7 +287,7 @@
                     }
                 }
             },
-            number: {
+            number: { //Маска для номера дебетовой карты
                 bind: function (el) {
                     el.oninput = function(e) {
                         var cardCode = this.value.replace(/[^\d]/g, '').substring(0, 16);

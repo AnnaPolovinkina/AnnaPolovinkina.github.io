@@ -8,7 +8,8 @@
                             v-bind:to="{name: 'home'}"
                             class="ico-main"
                         >
-                            <img src="@/assets/logo1.jpg" alt="Логотип">
+                            <!--<img src="@/assets/logo1.jpg" alt="Логотип">-->
+                            <span style="font-family: 'Mon Amour Two Medium', arial; color: #ffffff; font-size: 47px; text-decoration: none !important;">A</span>
                         </router-link>
                     </div>
                     <div class="col-xl-8 title">

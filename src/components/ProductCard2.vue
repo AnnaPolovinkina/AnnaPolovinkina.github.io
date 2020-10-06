@@ -56,22 +56,22 @@
                 type: String
             }
         },
-        watch: {
-            card: function f(newCard) {
+        watch: { //Отслеживание данных о товаре
+            card: function (newCard) {
                 this.$set(this.card, 'count', 1);
                 this.thisCard = newCard;
             }
         },
         methods: {
             ...mapActions(['addToCart']),
-            addCardToCart() {
+            addCardToCart() { //Добавление товара в корзину
                 this.addToCart(this.thisCard);
             },
-            openProductPage() {
+            openProductPage() { //Открытие детальной страницы товара
                 this.$router.push({name: 'product', query: {'product': this.card.id}});
             }
         },
-        mounted() {
+        mounted() { //Получение данных о товаре и установка начального количества товара
             this.$set(this.card, 'count', 1);
             this.thisCard = this.card;
         }

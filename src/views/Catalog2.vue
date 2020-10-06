@@ -5,11 +5,13 @@
             <div class="col-md-2">
                 <h3>Фильтр</h3>
                 <div class="catalog_filter">
+                    <h5>Категория</h5>
                     <SelectCategory
                         v-on:changeFilter="filteredCategory"
                         v-on:resetPage="resetPage"
 
                     ></SelectCategory>
+                    <h5>Скидка</h5>
                     <select
                         v-model="filterSale"
                         v-on:change="resetPage"
@@ -18,6 +20,7 @@
                         <option value="true">Со скидкой</option>
                         <option value="false">Без скидки</option>
                     </select>
+                    <h5>Цена</h5>
                     <select
                         v-model="filterPrice"
                         v-on:change="savePrice"
@@ -78,17 +81,17 @@
             Cart: Cart,
             Pagination: Pagination,
         },
-        mounted() {
+        mounted() { //Получение значений фильтров (по скидке и цене) и номера текущей страницы
           this.filterSale = this.$store.getters.getSale;
           this.filterPrice = this.$store.getters.getPrice;
           // this.pageNumber = 1;
           this.pageNumber = this.$store.getters.getPage;
         },
         methods: {
-            filteredCategory(data) {
+            filteredCategory(data) { //Получение значения фильтра по категории
                 this.filterCategory = data;
             },
-            sortCardPrice(valueSort, arrCards) {
+            sortCardPrice(valueSort, arrCards) { //Сортировка товаров по цене
                 for (var i = 0; i < arrCards.length; i++) {
                     for (var j = i; j < arrCards.length; j++) {
                         var conditionLoop;
@@ -105,44 +108,44 @@
                     }
                 }
             },
-            sortOneSelect(obj, key, arrCards, arrResultCards) {
+            sortOneSelect(obj, key, arrCards, arrResultCards) { //Сортировка по одному фильтру
                 arrCards.forEach(function (elem) {
                     if (String(elem[key]) == obj[key]) {
                         arrResultCards.push(elem);
                     }
                 });
             },
-            sortTwoSelect(obj1, key1, obj2, key2, arrCards, arrResultCards) {
+            sortTwoSelect(obj1, key1, obj2, key2, arrCards, arrResultCards) { //Сортировка по двум фильтрам
                 arrCards.forEach(function (elem) {
                     if (String(elem[key1]) == obj1[key1] && String(elem[key2]) == obj2[key2]) {
                         arrResultCards.push(elem);
                     }
                 });
             },
-            changePageNumber(data) {
+            changePageNumber(data) { //Смена номера текущей страницы
                 this.pageNumber = data;
             },
-            incrementPage() {
+            incrementPage() { //Увеличение номера текущей страницы
                 if (this.pageNumber < this.countPages) {
                     this.pageNumber++;
                 }
                 this.$store.dispatch('changePage', this.pageNumber)
             },
-            decrementPage() {
+            decrementPage() { //Уменьшение номера текущей страницы
                 if (this.pageNumber > 1) {
                     this.pageNumber--;
                 }
                 this.$store.dispatch('changePage', this.pageNumber)
             },
-            resetPage() {
+            resetPage() { //Сброс номера текущей страницы
                 this.pageNumber = 1;
                 this.$store.dispatch('changePage', this.pageNumber)
                 this.$store.dispatch('changeSale', this.filterSale)
             },
-            savePrice() {
+            savePrice() { //Сохранение в хранилище фильтра по цене
                 this.$store.dispatch('changePrice', this.filterPrice)
             },
-            resetFilters() {
+            resetFilters() { //Сброс всех фильтров
                 this.filteredCategory('');
                 this.filterSale = '';
                 this.filterPrice = '';
@@ -153,7 +156,7 @@
         computed: {
             ...mapGetters(['allProducts']),
             ...mapGetters(['cart']),
-            filteredCards() {
+            filteredCards() { //Фильтрация товаров по всем фильтрам
                 var filterCategory = this.filterCategory,
                     filterSale = this.filterSale,
                     filterPrice = this.filterPrice,
@@ -208,7 +211,7 @@
                 cardResult = cardResult.slice(from, to);
                 return cardResult;
             },
-            pages() {
+            pages() { //Количество страниц для категорий товаров
                 return this.countPages = Math.ceil(this.cardResultSort.length / this.cardPerPage);
             }
         }

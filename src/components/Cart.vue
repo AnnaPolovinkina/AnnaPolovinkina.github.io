@@ -18,6 +18,7 @@
         >
             <button class="btn btn_red">Оформить заказ</button>
         </router-link>
+        <button class="btn btn_red" style="background: grey">Очистить корзину</button>
     </div>
 </template>
 
@@ -39,7 +40,7 @@
             }
         },
         computed: {
-          cartTotalSum() {
+          cartTotalSum() { //Рассчет общей суммы корзины
               var result = [];
               if (this.cardData.length) {
                   this.cardData.forEach(function (elem, ind) {
@@ -54,15 +55,15 @@
         },
         methods: {
             ...mapActions(['deleteFromCart']),
-            deleteCartItemFromCart(index) {
+            deleteCartItemFromCart(index) { //Удаление товара из корзины
                 this.deleteFromCart(index);
             },
             ...mapActions(['incrementCartItem']),
             ...mapActions(['decrementCartItem']),
-            incrementItemCart(index) {
+            incrementItemCart(index) { //Увеличение количества одного товара
                 this.incrementCartItem(index);
             },
-            decrementItemCart(index) {
+            decrementItemCart(index) { //Уменьшение количества одного товара
                 this.decrementCartItem(index);
             }
         }
