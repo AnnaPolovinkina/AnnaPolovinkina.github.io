@@ -18,7 +18,11 @@
         >
             <button class="btn btn_red">Оформить заказ</button>
         </router-link>
-        <button class="btn btn_red" style="background: grey">Очистить корзину</button>
+        <button
+                class="btn btn_default"
+                v-on:click="resetCart"
+                v-if="cardData.length"
+        >Очистить корзину</button>
     </div>
 </template>
 
@@ -65,6 +69,10 @@
             },
             decrementItemCart(index) { //Уменьшение количества одного товара
                 this.decrementCartItem(index);
+            },
+            resetCart() {
+                this.$store.dispatch('resetCart');
+                this.cardData = []
             }
         }
     }

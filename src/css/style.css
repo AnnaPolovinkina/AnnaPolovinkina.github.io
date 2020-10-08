@@ -126,8 +126,13 @@ main {
 .btn_red {
   background-color: #FF0000;
   color: #FFFFFF; }
+.btn_default {
+  background-color: gray;
+  color: #ffffff;
+  margin-left: 20px; }
 .btn:hover {
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  color: #ffffff !important; }
 
 .card_title {
   font-weight: 700; }
@@ -303,14 +308,18 @@ img {
   width: 100%;
   height: auto; }
 .product-page_tags {
-  text-align: left;
-  margin-top: 20px; }
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap; }
   .product-page_tags-one {
     padding: 10px;
     background: #00796B;
     color: #FFFFFF;
     border-radius: 5px;
-    font-weight: bold; }
+    font-weight: bold;
+    margin-top: 20px; }
     .product-page_tags-one + .product-page_tags-one {
       margin-left: 10px; }
 .product-page_content {
@@ -337,5 +346,28 @@ img {
 
 a:hover {
   color: #000000; }
+
+label + input[type="radio"] {
+  margin-left: 20px; }
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon,
+.carousel-indicators {
+  opacity: 0; }
+
+.ico-main img {
+  border: 2px solid #000; }
+
+.cart-total {
+  margin-bottom: 20px; }
+
+.error {
+  margin-bottom: 20px; }
+
+.mt20 {
+  margin-top: 20px; }
+
+.swiper-container {
+  padding-bottom: 32px; }
 
 /*# sourceMappingURL=style.css.map */

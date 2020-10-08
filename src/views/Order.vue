@@ -43,7 +43,7 @@
                 </div>
                 <h3>Дата доставки</h3>
                 <Datepicker :value="date" :disabled-dates="state.disabledDates"></Datepicker>
-                <h3>Способ доставки</h3>
+                <h3 class="mt20">Способ доставки</h3>
                 <input id="courier" type="radio" name="delivery" value="courier" v-model="radioDelivery">
                 <label for="courier">Курьером</label>
                 <input id="pickup" type="radio" name="delivery" value="pickup" v-model="radioDelivery">
@@ -77,7 +77,7 @@
                         </yandex-map>
                     </div>
                 </div>
-                <h3>Способ оплаты</h3>
+                <h3 class="mt20">Способ оплаты</h3>
                 <input id="card" type="radio" name="payment" value="card" v-model="radioPayment">
                 <label for="card">По карте</label>
                 <input id="cash" type="radio" name="payment" value="cash" v-model="radioPayment">
@@ -87,7 +87,7 @@
                             v-if="radioPayment == 'card'"
                             class="delivery-content_number-card"
                     >
-                        <!--                        <input type="text" placeholder="Введите номер карты">-->
+                        <!-- <input type="text" placeholder="Введите номер карты">-->
                         <input
                                 type="text"
                                 name="cardNumber"
@@ -125,7 +125,7 @@
             <div>
                 Итоговое количество: <span class="total-sum">{{orderTotalCount}}</span>
             </div>
-            <div>
+            <div class="cart-total">
                 Итоговая сумма: <span class="total-sum">{{orderTotalSum}}</span>
             </div>
         <button type="submit" class="btn btn_red">Заказать</button>
