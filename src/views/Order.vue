@@ -1,135 +1,135 @@
 <template>
-    <div class="order">
+    <div class="order" v-show="orderTotalCount">
         <h1>Оформление заказа</h1>
         <ValidationObserver v-slot="{ handleSubmit, reset }" ref="form">
             <form @submit.prevent="handleSubmit(onSubmit)">
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Контактная информация</h2>
-                <div class="order_contact-info">
-                    <ValidationProvider name="name" rules="required|name">
-                        <div slot-scope="{ errors }">
-                            <input type="text" placeholder="Имя" v-model="name">
-                            <p class="error">{{ errors[0] }}</p>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h2>Контактная информация</h2>
+                        <div class="order_contact-info">
+                            <ValidationProvider name="name" rules="required|name">
+                                <div slot-scope="{ errors }">
+                                    <input type="text" placeholder="Имя" v-model="name">
+                                    <p class="error">{{ errors[0] }}</p>
+                                </div>
+                            </ValidationProvider>
+                            <ValidationProvider name="phone" rules="required|phone">
+                                <div slot-scope="{ errors }">
+                                    <div class="phone">
+                                        <span class="input-group-addon"><span>+7</span></span>
+                                        <input
+                                                type="tel"
+                                                v-model="phone"
+                                                name="phone"
+                                                id="phone"
+                                                placeholder="(555) 555-5555"
+                                                autocomplete="tel"
+                                                maxlength="14"
+                                                class="form-control"
+                                                v-phone
+                                                pattern="[(][0-9]{3}[)] [0-9]{3}-[0-9]{4}"
+                                        />
+                                    </div>
+
+                                    <p class="error">{{ errors[0] }}</p>
+                                </div>
+                            </ValidationProvider>
+                            <ValidationProvider name="email" rules="required|email">
+                                <div slot-scope="{ errors }">
+                                    <input type="text" placeholder="Электронная почта" v-model="email">
+                                    <p class="error">{{ errors[0] }}</p>
+                                </div>
+                            </ValidationProvider>
                         </div>
-                    </ValidationProvider>
-                    <ValidationProvider name="phone" rules="required|phone">
-                        <div slot-scope="{ errors }">
-                            <div class="phone">
-                                <span class="input-group-addon"><span>+7</span></span>
-                                <input
-                                        type="tel"
-                                        v-model="phone"
-                                        name="phone"
-                                        id="phone"
-                                        placeholder="(555) 555-5555"
-                                        autocomplete="tel"
-                                        maxlength="14"
-                                        class="form-control"
-                                        v-phone
-                                        pattern="[(][0-9]{3}[)] [0-9]{3}-[0-9]{4}"
-                                />
+                        <h3>Дата доставки</h3>
+                        <Datepicker :value="date" :disabled-dates="state.disabledDates"></Datepicker>
+                        <h3 class="mt20">Способ доставки</h3>
+                        <input id="courier" type="radio" name="delivery" value="courier" v-model="radioDelivery">
+                        <label for="courier">Курьером</label>
+                        <input id="pickup" type="radio" name="delivery" value="pickup" v-model="radioDelivery">
+                        <label for="pickup">Самовывоз</label>
+                        <div class="delivery-content">
+                            <div
+                                    v-if="radioDelivery == 'courier'"
+                                    class="delivery-content_address"
+                            >
+                                <input type="text" placeholder="Введите адрес доставки">
                             </div>
-
-                            <p class="error">{{ errors[0] }}</p>
+                            <div
+                                    v-if="radioDelivery == 'pickup'"
+                                    class="delivery-content_maps"
+                            >
+                                <yandex-map
+                                        :settings="settings"
+                                        :coords="[50.606471, 36.579291]"
+                                        zoom="16"
+                                        style="width: 100%; height: 200px;"
+                                >
+                                    <ymap-marker
+                                            marker-type="placemark"
+                                            markerId="1"
+                                            :coords="[50.606471, 36.579291]"
+                                            hint-content='Бизнес-центр "Энергомаш"'
+                                            :balloon="{header: baloonHeader, body: baloonBody, footer: baloonFooter}"
+                                            :icon="{color: 'red', glyph: 'shopping'}"
+                                            cluster-name="1"
+                                    ></ymap-marker>
+                                </yandex-map>
+                            </div>
                         </div>
-                    </ValidationProvider>
-                    <ValidationProvider name="email" rules="required|email">
-                        <div slot-scope="{ errors }">
-                            <input type="text" placeholder="Электронная почта" v-model="email">
-                            <p class="error">{{ errors[0] }}</p>
+                        <h3 class="mt20">Способ оплаты</h3>
+                        <input id="card" type="radio" name="payment" value="card" v-model="radioPayment">
+                        <label for="card">По карте</label>
+                        <input id="cash" type="radio" name="payment" value="cash" v-model="radioPayment">
+                        <label for="cash">Наличными</label>
+                        <div class="delivery-content">
+                            <div
+                                    v-if="radioPayment == 'card'"
+                                    class="delivery-content_number-card"
+                            >
+                                <!-- <input type="text" placeholder="Введите номер карты">-->
+                                <input
+                                        type="text"
+                                        name="cardNumber"
+                                        pattern="[0-9]{4}\s[0-9]{4}\s[0-9]{4}\s[0-9]{4}"
+                                        placeholder="XXXX XXXX XXXX XXXX"
+                                        v-number
+                                >
+                            </div>
                         </div>
-                    </ValidationProvider>
-                </div>
-                <h3>Дата доставки</h3>
-                <Datepicker :value="date" :disabled-dates="state.disabledDates"></Datepicker>
-                <h3 class="mt20">Способ доставки</h3>
-                <input id="courier" type="radio" name="delivery" value="courier" v-model="radioDelivery">
-                <label for="courier">Курьером</label>
-                <input id="pickup" type="radio" name="delivery" value="pickup" v-model="radioDelivery">
-                <label for="pickup">Самовывоз</label>
-                <div class="delivery-content">
-                    <div
-                            v-if="radioDelivery == 'courier'"
-                            class="delivery-content_address"
-                    >
-                        <input type="text" placeholder="Введите адрес доставки">
                     </div>
-                    <div
-                            v-if="radioDelivery == 'pickup'"
-                            class="delivery-content_maps"
-                    >
-                        <yandex-map
-                                :settings="settings"
-                                :coords="[50.606471, 36.579291]"
-                                zoom="16"
-                                style="width: 100%; height: 200px;"
-                        >
-                            <ymap-marker
-                                    marker-type="placemark"
-                                    markerId="1"
-                                    :coords="[50.606471, 36.579291]"
-                                    hint-content='Бизнес-центр "Энергомаш"'
-                                    :balloon="{header: baloonHeader, body: baloonBody, footer: baloonFooter}"
-                                    :icon="{color: 'red', glyph: 'shopping'}"
-                                    cluster-name="1"
-                            ></ymap-marker>
-                        </yandex-map>
-                    </div>
-                </div>
-                <h3 class="mt20">Способ оплаты</h3>
-                <input id="card" type="radio" name="payment" value="card" v-model="radioPayment">
-                <label for="card">По карте</label>
-                <input id="cash" type="radio" name="payment" value="cash" v-model="radioPayment">
-                <label for="cash">Наличными</label>
-                <div class="delivery-content">
-                    <div
-                            v-if="radioPayment == 'card'"
-                            class="delivery-content_number-card"
-                    >
-                        <!-- <input type="text" placeholder="Введите номер карты">-->
-                        <input
-                                type="text"
-                                name="cardNumber"
-                                pattern="[0-9]{4}\s[0-9]{4}\s[0-9]{4}\s[0-9]{4}"
-                                placeholder="XXXX XXXX XXXX XXXX"
-                                v-number
-                        >
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-md-8">
-                <h3>Характеристики заказа</h3>
-                <div class="row order_caption">
-                    <h4 class="col-md-4">Товар</h4>
-                    <h4 class="col-md-4">Наименование</h4>
-                    <h4 class="col-md-4">Количество</h4>
+                    <div class="col-md-8">
+                        <h3>Характеристики заказа</h3>
+                        <div class="row order_caption">
+                            <h4 class="col-md-4">Товар</h4>
+                            <h4 class="col-md-4">Наименование</h4>
+                            <h4 class="col-md-4">Количество</h4>
+                        </div>
+                        <div
+                                class="order-item row"
+                                v-for="position in thisOrder"
+                        >
+                            <div class="order-item_img col-md-4">
+                                <img v-bind:src="position.img_full">
+                            </div>
+                            <div class="col-md-4">
+                                <span>{{position.title}}</span>
+                            </div>
+                            <div class="col-md-4">
+                                <span>{{position.count}}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div
-                        class="order-item row"
-                        v-for="position in thisOrder"
-                >
-                    <div class="order-item_img col-md-4">
-                        <img v-bind:src="position.img_full">
-                    </div>
-                    <div class="col-md-4">
-                        <span>{{position.title}}</span>
-                    </div>
-                    <div class="col-md-4">
-                        <span>{{position.count}}</span>
-                    </div>
+                <div>
+                    Итоговое количество: <span class="total-sum">{{orderTotalCount}}</span>
                 </div>
-            </div>
-        </div>
-            <div>
-                Итоговое количество: <span class="total-sum">{{orderTotalCount}}</span>
-            </div>
-            <div class="cart-total">
-                Итоговая сумма: <span class="total-sum">{{orderTotalSum}}</span>
-            </div>
-        <button type="submit" class="btn btn_red">Заказать</button>
-        </form>
+                <div class="cart-total">
+                    Итоговая сумма: <span class="total-sum">{{orderTotalSum}}</span>
+                </div>
+                <button type="submit" class="btn btn_red">Заказать</button>
+            </form>
         </ValidationObserver>
         <InfoPopup></InfoPopup>
     </div>
@@ -148,7 +148,7 @@
         message: "Это поле обязательно для заполнения"
     });
     extend('name', value => {
-        if (value.length < 4) {
+        if (value.length < 3) {
             if (!(/^[а-яa-z]+$/i.test(value))) {
                 return 'Имя должно состоять только из букв';
             }
@@ -215,7 +215,7 @@
             ymapMarker: ymapMarker,
             InfoPopup: InfoPopup,
             ValidationObserver: ValidationObserver,
-            ValidationProvider: ValidationProvider
+            ValidationProvider: ValidationProvider,
         },
         mounted() { //Получение данных о заказе (товары, их количество и сумма)
             if (this.$route.params.cardData || typeof this.$route.params.cardData !== 'undefined') {
@@ -253,7 +253,10 @@
         methods: {
             sendOrder() { //Отправка заказа (обнуление данных, появление всплывающего окна)
                 if (this.thisOrder.length) {
-                    this.$bvModal.show('bv-modal-example')
+                    this.$bvModal.show('bv-modal-example');
+                    /*setTimeout(function () {
+                        location.replace("/");
+                    }, 3000);*/
                 }
                 this.$store.dispatch('resetOrder')
                 this.$store.dispatch('resetCart')

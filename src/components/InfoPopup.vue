@@ -33,6 +33,11 @@
 
 <script>
     export default {
-        name: "InfoPopup"
+        name: "InfoPopup",
+        mounted() {
+            this.$root.$on('bv::modal::hidden', (bvEvent, modalId) => {
+                location.replace("/");
+            })
+        }
     }
 </script>
