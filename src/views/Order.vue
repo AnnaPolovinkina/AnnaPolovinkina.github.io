@@ -296,9 +296,8 @@
                         var cardCode = this.value.replace(/[^\d]/g, '').substring(0, 16);
                         cardCode = cardCode != '' ? cardCode.match(/.{1,4}/g).join(' ') : '';
                         this.value = cardCode;
-                        el.dispatchEvent(new Event('input'));
+                        // el.dispatchEvent(new Event('input'));
                     }
-
                 }
             }
         }

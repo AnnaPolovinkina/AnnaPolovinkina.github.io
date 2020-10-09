@@ -3,7 +3,7 @@
         <div class="container">
             <div class="header_wrapper">
                 <div class="row justify-content">
-                    <div class="col-xl-2 logo">
+                    <div class="col-xl-2 col-3 logo">
                         <router-link
                             v-bind:to="{name: 'home'}"
                             class="ico-main"
@@ -12,7 +12,7 @@
                             <!--<span style="font-family: 'Mon Amour Two Medium', arial; color: #ffffff; font-size: 47px; text-decoration: none !important;">A</span>-->
                         </router-link>
                     </div>
-                    <div class="col-xl-8 title">
+                    <div class="col-xl-8 col-6 title">
                         <router-link
                             v-bind:to="{name: 'home'}"
                             class="header_link"
@@ -32,7 +32,7 @@
                             Корзина
                         </router-link>
                     </div>
-                    <div class="col-xl-2 cart">
+                    <div class="col-xl-2 col-3 cart">
                         <router-link
                                 v-bind:to="{name: 'cart', params: {cardData: cart}}"
                                 class="icon-cart"
